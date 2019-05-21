@@ -93,7 +93,7 @@ public class UserDaoImpl implements UserDao {
 		
 		String sql = "Select *from user where userId=? ";
 		Object[] params =new Object[] {userId};
-		return getUser(sql,params,userId);
+		return getUser(sql,params);
 
 	}
 
