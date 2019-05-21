@@ -56,5 +56,31 @@ public class ReviewDaoImpl  implements ReviewDao {
 		
 		return list;
 	}
+	/**
+	 * 
+	 * 根据reviewid获取到review
+	 * 
+	 * 
+	 * **/
+	@Override
+	public Review getReviewById(int review_Id) {
+		BaseDao aa = new BaseDao();
+		String sql = "Select *from review where reviewId = ?";
+		ResultSet res = aa.executeSelect(sql, new Object[] {review_Id});
+		Review t = null;
+		try {
+			if(res.next()) {
+				int reviewId = res.getInt(1);
+				int commentId1 = res.getInt(2);
+				int userId = res.getInt(3);
+				String content = res.getString(4);
+				String remarkstr = res.getString(5);
+				String NickName = res.getString(6);
+				t = new Review(reviewId,commentId1,userId, content, remarkstr,NickName);
+			}
+		} catch (SQLException e) {
+		}
+		return t;
+	}
 
 }

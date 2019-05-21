@@ -2,11 +2,14 @@ package neu.edu.service;
 
 import neu.edu.entity.Comment;
 import neu.edu.dao.CommentDao;
+import neu.edu.dao.NewsDao;
 import neu.edu.dao.impl.CommentDaoImpl;
+import neu.edu.dao.impl.NewsDaoImpl;
 
 public class AddCommentService {
 	
 	private CommentDao CommentDao = new CommentDaoImpl();
+	private NewsDao newsDao = new NewsDaoImpl();
 	
 	/**
 	 * 将comment对象作为参数,调用CommentDao访问数据库，增加数据库中的一级评论记录
@@ -15,6 +18,12 @@ public class AddCommentService {
 	 * @return
 	 */
 	public int addComment(Comment co) {
-		return CommentDao.addComment(co);
+			int b = 0;
+			int a =	CommentDao.addComment(co);
+			if(a==1) {
+				b =  newsDao.addNumOfCommentstoNews(co.getNewsId());
+			}
+			if(b==1) return 1; 
+			else return 0;
 	}
 }

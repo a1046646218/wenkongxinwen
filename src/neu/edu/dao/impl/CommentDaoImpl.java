@@ -23,8 +23,8 @@ public class CommentDaoImpl  implements CommentDao{
 	@Override
 	public int addComment(Comment co) {
 		BaseDao aa = new BaseDao();
-		String sql = "insert into comment values(?,?,?,?,?,?,?)";
-		Object[] obj = new Object[] {co.getCommentId(),co.getUserId(),co.getNewsId()
+		String sql = "insert into comment(userId,newsId,content,likes,reviews,nickName) values(?,?,?,?,?,?)";
+		Object[] obj = new Object[] {co.getUserId(),co.getNewsId()
 			,co.getContent(),co.getLikes(),co.getReviews(),co.getNickName()};
 		int res = aa.executeIUD(sql, obj);
 		return res;
@@ -99,5 +99,14 @@ public class CommentDaoImpl  implements CommentDao{
 			aa.closeAll(aa.con, aa.pst, aa.rs);
 		}
 		return list;
+	}
+	
+
+	@Override
+	public int addNumOfReviewsToComment(int comment_id) {
+		BaseDao aa = new BaseDao();
+		String sql = "update comments set reviews=reviews+1 where commentId=?";
+		int res = aa.executeIUD(sql, new Object[] {comment_id});
+		return res;
 	}
 }

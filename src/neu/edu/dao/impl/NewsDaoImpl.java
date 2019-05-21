@@ -70,6 +70,8 @@ public class NewsDaoImpl implements NewsDao{
 		return res;
 	}
 	
+	
+	
 	/**
 	 * 根据传入的new_id（新闻ID）,找到news表中对应的行数，在该行将likes值+1
 	 * 若成功返回1 失败返回0
@@ -185,5 +187,13 @@ public class NewsDaoImpl implements NewsDao{
 				aa.closeAll(aa.con, aa.pst, aa.rs);
 			}
 		return newsList;
+	}
+
+	@Override
+	public int addNumOfCommentstoNews(int new_id) {
+		BaseDao aa = new BaseDao();
+		String sql = "update news set comments=comments+1 where newsId=?";
+		int res = aa.executeIUD(sql, new Object[] {new_id});
+		return res;
 	}
 }

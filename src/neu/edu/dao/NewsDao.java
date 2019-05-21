@@ -35,4 +35,6 @@ public interface NewsDao {
 	public ArrayList<News>  getNewsListByID(int user_id);
 	
 	public News getNewsByID(int new_id);
+	
+	public int addNumOfCommentstoNews(int new_id);
 }

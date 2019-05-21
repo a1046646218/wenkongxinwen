@@ -19,4 +19,6 @@ public interface CommentDao {
 	public ArrayList<Comment> getCommentListByNewId(int new_id);
 	
 	public ArrayList<Comment> getCommentListByUserId(int user_id);
+	
+	public int addNumOfReviewsToComment(int comment_id);
 }
