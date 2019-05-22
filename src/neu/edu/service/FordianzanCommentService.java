@@ -27,7 +27,7 @@ public class FordianzanCommentService {
 	 * 返回值 int  flag
 	 * 让user_id给comment_id的评论点赞插入数据库表中
 	 * 更新两张表 comment和commentlike的表
-	 * 如果之前点赞了返回0  这次点赞则返回1
+	 * 如果之前点赞了返回1  没有点赞返回0
 	 **/
 	public int addDianzanComment(int user_id, int comment_id) {
 		int a = commentLikeDao.isUpVoted(user_id, comment_id);

@@ -33,7 +33,7 @@ public class getCommentsListAjaxServlet extends HttpServlet {
 		FordianzanCommentService se = new FordianzanCommentService();
 		CommentDecode a = null;
 		for(int i=0;i<list.size();i++) {
-			a = new CommentDecode(list.get(i), se.addDianzanComment(u.getUserId(), list.get(i).getCommentId()));
+			a = new CommentDecode(list.get(i), se.isUpVoted(u.getUserId(), list.get(i).getCommentId()));
 			lide.add(a);
 		}
 		String jsonString = JSON.toJSONString(lide);

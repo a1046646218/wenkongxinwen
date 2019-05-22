@@ -20,6 +20,7 @@ public class addLikeCommentAjaxServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int commentId = Integer.parseInt(request.getParameter("commentId"));
+		System.out.println("µãÔÞ"+commentId);
 		FordianzanCommentService ser = new FordianzanCommentService();
 		User u = (User) request.getSession().getAttribute("user");
 		int flag = ser.addDianzanComment(u.getUserId(), commentId);
