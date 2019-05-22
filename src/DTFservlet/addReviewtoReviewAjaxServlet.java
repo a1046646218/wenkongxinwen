@@ -24,9 +24,15 @@ public class addReviewtoReviewAjaxServlet extends HttpServlet {
 		String context = request.getParameter("reviewcotent");
 		User u = (User) request.getSession().getAttribute("user");
 		Review re = new ForReviewService().getReviewById(reviewId);
-		Review nowre = new Review(0, re.getCommentId(), u.getUserId(), context, "@"+re.getNickName()+":"+re.getContent(), u.getNickName());
+		String strsubcontent = null;
+		if(re.getContent().length()>=10) {
+			strsubcontent = re.getContent().substring(0, 6);
+		}else {
+			strsubcontent = re.getContent();
+		}
+		Review nowre = new Review(0, re.getCommentId(), u.getUserId(), context, "@"+re.getNickName()+":"+strsubcontent, u.getNickName());
 		int i  = new AddReviewService().addReview(nowre);
-		nowre.setReviewId(reviewId);
+		nowre.setReviewId(i);
 		if(i!=0) {
 			String jsonString = JSON.toJSONString(nowre);
 			System.out.println(jsonString);

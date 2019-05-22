@@ -16,7 +16,7 @@
         <meta charset="UTF-8">
         <!-- Site Title -->
         <title>Blogger</title>
-
+       
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
             <!--
             CSS
@@ -189,58 +189,13 @@
                             				时间：2019-05-20
                             				描述：评论
                             			-->
-                                        <div class="comment-list">
-                                            <div class="single-comment justify-content-between d-flex">
-                                                <div class="user justify-content-between d-flex">
-                                                    <div class="thumb">
-                                                        <img src="img/asset/c1.jpg" alt="">
-                                                    </div>
-                                                    <div class="desc">
-                                                        <h5><a href="#">Emilly Blunt</a></h5>
-                                                        <br>
-                                                        <p class="comment">
-                                                            Never say goodbye till the end comes!
-                                                        </p>
-                                                        <!--
-                                                        	作者：offline
-                                                        	时间：2019-05-20
-                                                        	描述：点开喜爱和评论
-                                                        -->
-                                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                                        		<span>10</span>喜欢&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <i class="fa fa-comment-o" aria-hidden="true"></i> 
-                                                        	 <span>10</span>评论 
-                                                    </div>
-                                                </div>
-                                                <div class="reply-btn">
-                                                       <a href="" class="btn-reply text-uppercase">reply</a> 
-                                                </div>
-                                            </div>
-                                        </div>
+                                       
                                          <!--
                             				作者：offline
                             				时间：2019-05-20
                             				描述：二级评论
                             			-->
-                                        <div class="comment-list left-padding">
-                                            <div class="single-comment justify-content-between d-flex">
-                                                <div class="user justify-content-between d-flex">
-                                                    <div class="thumb">
-                                                        <img src="img/asset/c2.jpg" alt="">
-                                                    </div>
-                                                    <div class="desc">
-                                                        <h5><a href="#">Emilly Blunt</a></h5>
-                                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                                        <p class="comment">
-                                                            Never say goodbye till the end comes!
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="reply-btn">
-                                                       <a href="" class="btn-reply text-uppercase">reply</a> 
-                                                </div>
-                                            </div>
-                                        </div>                                                                                                                                                               
+                                                                                                                                                                                                       
                                     </div>
                                 </div>    
                             </section>
@@ -620,14 +575,17 @@ $(document).ready(function(){
                                            "</div>"+
                                         "</div>"+
                                     "</div>";
+			//farherreview是小的子评论
 			$fatherreview.after($(str));
 			$fatherreview.next().find('#tijiaoerjihuifu').click(function(){
 				var reviewtextarea = $(this).parent().prev();
-				var reviewcotent = $(this).parent().prev().val();			
+				var reviewcotent = reviewtextarea.val();	
+				//整个的包括review和输入框的
 				var reviewelement = $(this).parent().parent().parent().parent();
 				var reviewId = $(this).parent().parent().parent().parent().attr("name");
 				//alert(reviewcotent);
 				//alert(commentId);
+				
 				if(reviewcotent==""||reviewcotent=="评论一些想法吧..."){
 				}else{
 							$.ajax({
@@ -642,6 +600,8 @@ $(document).ready(function(){
 											var jsoncomment = JSON.parse(result);
 											reviewtextarea.val('');
 											$huifu.text("回复");
+											var huifunum = reviewelement.prev('#itisfirst').find('#bt_chaer').next().text();
+											reviewelement.prev('#itisfirst').find('#bt_chaer').next().text(parseInt(huifunum)+1);
 											$fatherreview.next().remove();
 											
 											
