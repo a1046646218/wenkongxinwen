@@ -24,8 +24,10 @@ public class addReviewtoCommentAjaxServlet extends HttpServlet {
 		User u = (User) request.getSession().getAttribute("user");
 		Review re = new Review(0, commentId, u.getUserId(), reviewcotent, "", u.getNickName());
 		int i = a.addReview(re);
-		if(i==1) {
+		re.setReviewId(i);
+		if(i!=0) {
 			String jsonString = JSON.toJSONString(re);
+			System.out.println("sssssssssssssssss");
 			System.out.println(jsonString);
 			response.getWriter().println(jsonString);
 		}else {

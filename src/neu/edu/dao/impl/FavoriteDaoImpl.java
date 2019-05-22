@@ -25,7 +25,7 @@ public class FavoriteDaoImpl  implements FavoriteDao{
 		ArrayList<Integer> newsIdList = new ArrayList<>();
 		try {
 			while(rs.next()) {
-				newsIdList.add(rs.getInt(2));
+				newsIdList.add(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

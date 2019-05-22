@@ -18,8 +18,9 @@ public class AddReviewService {
 	 */
 	public int addReview(Review review) {
 		int a = reviewDao.addReview(review);
-		if(a==1) {
-			return commentDao.addNumOfReviewsToComment(review.getCommentId());
+		if(a!=0) {
+			commentDao.addNumOfReviewsToComment(review.getCommentId());
+			return a;
 		}else
 			return 0;
 	}

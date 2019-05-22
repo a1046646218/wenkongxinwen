@@ -10,11 +10,13 @@ public class User {
 	private int vip; //vip
 	private int type;//用户是否为能发新闻的 0/1
 	private String Password;//密码
-		public User() {
+	private String userimage;
+		
+	public User() {
 			
 		}
 	public User(int userId, String userName, String nickName, int followings, int followers, String introduction,
-			int vip, int type, String pwd) {
+			int vip, int type, String pwd,String userimage) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -74,11 +76,17 @@ public class User {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public String getPwd() {
+	public String getPassword() {
 		return Password;
 	}
-	public void setPwd(String pwd) {
-		this.Password = pwd;
+	public void setPassword(String password) {
+		Password = password;
+	}
+	public String getUserimage() {
+		return userimage;
+	}
+	public void setUserimage(String userimage) {
+		this.userimage = userimage;
 	}
 	
 }

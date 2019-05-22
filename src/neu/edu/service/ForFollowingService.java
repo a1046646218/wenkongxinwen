@@ -22,7 +22,7 @@ public class ForFollowingService {
 	public ArrayList<User> getUserGuanByID(int user_id){
 		ArrayList<User> list = new ArrayList<>();
 		
-		ArrayList<Integer> li  =  followingDao.getFollowersByID(user_id);
+		ArrayList<Integer> li  =  followingDao.getFollowingByID(user_id);
 		for(int i=0;i<li.size();i++) {
 			User u = userDao.getUserByUserId(li.get(i));
 			list.add(u);
@@ -40,7 +40,7 @@ public class ForFollowingService {
 	public ArrayList<User> getUserFenByID(int user_id){
 		ArrayList<User> list = new ArrayList<>();
 		
-		ArrayList<Integer> li  =  followingDao.getFollowingByID(user_id);
+		ArrayList<Integer> li  =  followingDao.getFollowersByID(user_id);
 		for(int i=0;i<li.size();i++) {
 			User u = userDao.getUserByUserId(li.get(i));
 			list.add(u);

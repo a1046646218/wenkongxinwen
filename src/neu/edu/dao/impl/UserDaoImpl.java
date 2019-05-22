@@ -22,9 +22,9 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int addUser(String username, String nickname, String introduction, String password) {
 		BaseDao aa = new BaseDao();
-		String sql = "insert into user (userName,nickName,followings,followers,introduction,vip,type,Password)"
-				+ " values(?,?,?,?,?,?,?,?)";
-		int bb =  aa.executeIUD(sql,new Object[] {username,nickname,0,0,introduction,0,0,password});	
+		String sql = "insert into user (userName,nickName,followings,followers,introduction,vip,type,Password,userimage)"
+				+ " values(?,?,?,?,?,?,?,?,?)";
+		int bb =  aa.executeIUD(sql,new Object[] {username,nickname,0,0,introduction,0,0,password,"img/i7.jpg"});	
 		return bb;
 	}
 	
@@ -36,10 +36,10 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int addUser(User user) {
 		BaseDao aa = new BaseDao();
-		String sql = "insert into user (userName,nickName,followings,followers,introduction,vip,type,Password)"
-				+ " values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into user (userName,nickName,followings,followers,introduction,vip,type,Password,userimage)"
+				+ " values(?,?,?,?,?,?,?,?,?)";
 		int bb =  aa.executeIUD(sql,new Object[] {user.getUserName(),user.getNickName(),user.getFollowings()
-				,user.getFollowers(),user.getIntroduction(),user.getVip(),user.getType(),user.getPwd()});	
+				,user.getFollowers(),user.getIntroduction(),user.getVip(),user.getType(),user.getPassword(),user.getUserimage()});	
 		return bb;
 	}
 	
@@ -138,7 +138,7 @@ public class UserDaoImpl implements UserDao {
 			while(bb.next()) {
 				p = new User();
 				p.setUserName(bb.getString(2));
-				p.setPwd(bb.getString(9));
+				p.setPassword(bb.getString(9));
 				p.setFollowers(bb.getInt(5));
 				p.setFollowings(bb.getInt(4));
 				p.setIntroduction(bb.getString(6));
@@ -146,6 +146,7 @@ public class UserDaoImpl implements UserDao {
 				p.setType( Integer.parseInt(bb.getString(8)));     //×Ö·û´®×ªÊý×Ö
 				p.setVip(bb.getInt(7));
 				p.setUserId(bb.getInt(1));
+				p.setUserimage(bb.getString(10));
 			}		
 		} catch (SQLException e) {
 			e.printStackTrace();

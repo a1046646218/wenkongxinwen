@@ -26,7 +26,8 @@ public class addReviewtoReviewAjaxServlet extends HttpServlet {
 		Review re = new ForReviewService().getReviewById(reviewId);
 		Review nowre = new Review(0, re.getCommentId(), u.getUserId(), context, "@"+re.getNickName()+":"+re.getContent(), u.getNickName());
 		int i  = new AddReviewService().addReview(nowre);
-		if(i==1) {
+		nowre.setReviewId(reviewId);
+		if(i!=0) {
 			String jsonString = JSON.toJSONString(nowre);
 			System.out.println(jsonString);
 			response.getWriter().println(jsonString);
