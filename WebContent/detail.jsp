@@ -455,7 +455,7 @@ $(document).ready(function(){
 			success:function(result){
 				if(result!=""){
 					var jsoncomment = JSON.parse(result);
-				var str = "<div class=\"comment-list\" name=\""+jsoncomment.commentId+"\">"+
+				var str = "<div class=\"comment-list\" id=\"itisfirst\" name=\""+jsoncomment.commentId+"\">"+
                                             "<div class=\"single-comment justify-content-between d-flex\">"+
                                                 "<div class=\"user justify-content-between d-flex\">"+
                                                     "<div class=\"thumb\">"+
@@ -517,7 +517,7 @@ $(document).ready(function(){
 									data:{"commentId":commentId,"reviewcotent":reviewcotent},
 									success:function(result){
 										if(result!=""){
-											alert(jsoncomment);
+											//alert(jsoncomment);
 											var jsoncomment = JSON.parse(result);
 											reviewtextarea.val('');
 											var review_num = commentelement.find('#bt_chaer').next().text();	
@@ -600,8 +600,16 @@ $(document).ready(function(){
 											var jsoncomment = JSON.parse(result);
 											reviewtextarea.val('');
 											$huifu.text("回复");
-											var huifunum = reviewelement.prev('#itisfirst').find('#bt_chaer').next().text();
-											reviewelement.prev('#itisfirst').find('#bt_chaer').next().text(parseInt(huifunum)+1);
+											
+//											while($fathercomment.next().attr("id")=="itissecond"){
+//													$fathercomment.next().remove();
+//											}
+											while(reviewelement.attr("id")!="itisfirst"){
+												reviewelement = reviewelement.prev();
+											}
+											var huifunum = reviewelement.find('#bt_chaer').next().text();
+											alert(huifunum);
+											reviewelement.find('#bt_chaer').next().text(parseInt(huifunum)+1);
 											$fatherreview.next().remove();
 											
 											
