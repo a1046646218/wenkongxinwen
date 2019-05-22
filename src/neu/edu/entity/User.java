@@ -10,9 +10,9 @@ public class User {
 	private int vip; //vip
 	private int type;//用户是否为能发新闻的 0/1
 	private String Password;//密码
-	
 	private String userimage;
-		public User() {
+		
+	public User() {
 			
 		}
 	public User(int userId, String userName, String nickName, int followings, int followers, String introduction,
