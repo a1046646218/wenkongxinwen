@@ -1,7 +1,10 @@
 package neu.edu.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import neu.edu.dao.ReviewDao;
@@ -20,10 +23,30 @@ public class ReviewDaoImpl  implements ReviewDao {
 	@Override
 	public int addReview(Review review) {
 		BaseDao aa = new BaseDao();
-		String sql = "insert into review values(?,?,?,?,?,?)";
-		Object[] params = new Object[] {review.getCommentId(),review.getCommentId(),review.getUserId()
+		String sql = "insert into review(commentId,userId,content,remarkStr,nickName) values(?,?,?,?,?)";
+		Object[] params = new Object[] {review.getCommentId(),review.getUserId()
 				,review.getContent(),review.getRemarkstr(),review.getNickName()};
-		return aa.executeIUD(sql, params);
+		ResultSet rs = null;
+		int  increasenum = 0;
+		try {
+			Connection conn = aa.getCon();
+			System.out.println(conn);
+			PreparedStatement st;
+			st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			if (null!=params) {
+				for (int i = 0; i <params.length; i++) {
+					st.setObject(i+1, params[i]);//为sql中的每一个?赋值
+				}
+			}
+			st.executeUpdate();
+			rs = st.getGeneratedKeys(); //获取自动增加主键
+			if(rs.next()) {
+					increasenum=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return increasenum;
 	}
 	
 	/**

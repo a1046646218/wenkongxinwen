@@ -22,7 +22,9 @@ public class addCommenttoNewsAjaxServlet extends HttpServlet {
 		User u = (User) request.getSession().getAttribute("user");
 		Comment co = new Comment(0, u.getUserId(), new_id, context,0 , 0, u.getNickName());
 		int i  = new AddCommentService().addComment(co);
-		if(i==1) {
+		System.out.println(co);
+		co.setCommentId(i);
+		if(i!=0) {
 			String jsonString = JSON.toJSONString(co);
 			System.out.println(jsonString);
 			response.getWriter().println(jsonString);

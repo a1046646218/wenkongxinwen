@@ -561,7 +561,8 @@ $(document).ready(function(){
 									dataType:"text",
 									data:{"commentId":commentId,"reviewcotent":reviewcotent},
 									success:function(result){
-										if(jsoncomment!=""){
+										if(result!=""){
+											alert(jsoncomment);
 											var jsoncomment = JSON.parse(result);
 											reviewtextarea.val('');
 											var review_num = commentelement.find('#bt_chaer').next().text();	
@@ -636,7 +637,7 @@ $(document).ready(function(){
 									dataType:"text",
 									data:{"reviewId":reviewId,"reviewcotent":reviewcotent},
 									success:function(result){
-										if(jsoncomment!=""){
+										if(result!=""){
 											//alert(result);
 											var jsoncomment = JSON.parse(result);
 											reviewtextarea.val('');

@@ -20,10 +20,10 @@ public class AddCommentService {
 	public int addComment(Comment co) {
 			int b = 0;
 			int a =	CommentDao.addComment(co);
-			if(a==1) {
+			if(a!=0) {
 				b =  newsDao.addNumOfCommentstoNews(co.getNewsId());
 			}
-			if(b==1) return 1; 
+			if(b!=0) return a; 
 			else return 0;
 	}
 }

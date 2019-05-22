@@ -2,12 +2,17 @@ package neu.edu.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import neu.edu.dao.CommentDao;
 import neu.edu.dbutil.BaseDao;
 import neu.edu.entity.Comment;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  * 实现了CommentDao
  * @author mr.H
@@ -25,9 +30,29 @@ public class CommentDaoImpl  implements CommentDao{
 		BaseDao aa = new BaseDao();
 		String sql = "insert into comment(userId,newsId,content,likes,reviews,nickName) values(?,?,?,?,?,?)";
 		Object[] obj = new Object[] {co.getUserId(),co.getNewsId()
-			,co.getContent(),co.getLikes(),co.getReviews(),co.getNickName()};
-		int res = aa.executeIUD(sql, obj);
-		return res;
+			,co.getContent(),co.getLikes(),co.getReviews(),co.getNickName()};	
+		
+		ResultSet rs = null;
+		int  increasenum = 0;
+		try {
+			Connection conn = aa.getCon();
+			System.out.println(conn);
+			PreparedStatement st;
+			st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			if (null!=obj) {
+				for (int i = 0; i <obj.length; i++) {
+					st.setObject(i+1, obj[i]);//为sql中的每一个?赋值
+				}
+			}
+			st.executeUpdate();
+			rs = st.getGeneratedKeys(); //获取自动增加主键
+			if(rs.next()) {
+					increasenum=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return increasenum;
 
 	}
 	
@@ -105,7 +130,7 @@ public class CommentDaoImpl  implements CommentDao{
 	@Override
 	public int addNumOfReviewsToComment(int comment_id) {
 		BaseDao aa = new BaseDao();
-		String sql = "update comments set reviews=reviews+1 where commentId=?";
+		String sql = "update comment set reviews=reviews+1 where commentId=?";
 		int res = aa.executeIUD(sql, new Object[] {comment_id});
 		return res;
 	}
