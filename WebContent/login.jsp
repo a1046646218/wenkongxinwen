@@ -27,9 +27,10 @@
 		</div>
 		<div style="background:#F00;text-align:center" id="scan2"></div>
 		<button id="submit" type="submit">登 录</button>
-	<div style="background:#F00;">
     <c:if test="${!empty errorMsg }">
+    <div style="background:#F00;height:30px">
     ${errorMsg }
+    </div>
     </c:if>
     </div>
 	</form>

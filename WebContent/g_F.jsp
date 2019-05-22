@@ -185,7 +185,7 @@
                 </div>
             </footer>
             <!-- End footer Area -->        
-            <script type="text/javascript" src="/NEUNews/js/template.js" ></script>
+            <script type="text/javascript" src="/js/template.js" ></script>
             <script src="js/vendor/jquery-2.2.4.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
             <script src="js/vendor/bootstrap.min.js"></script>
@@ -195,7 +195,6 @@
             <script src="js/jquery.magnific-popup.min.js"></script>             
             <script src="js/jquery.sticky.js"></script>
             <script src="js/main.js"></script>  
-            <script type="text/javascript" src="/NEUNews/js/jquery-1.8.3.min.js" ></script>
 <script>
 $(function(){
 	var type=$("#type").html();
@@ -230,7 +229,7 @@ $(function(){
 		});
 	}
 	
-$('#guanzhu').live('click',function(){
+$('body').on('click',"#guanzhu",function(){
 	var type=$("#table").attr("value");
 	if(type=="fans")
 	{
@@ -251,7 +250,7 @@ $('#guanzhu').live('click',function(){
 });
 
 
-$('#fans').live('click',function(){
+$('body').on('click',"#fans",function(){
 	var type=$("#table").attr("value");
 	if(type=="guanzhu")
 		{	
@@ -271,18 +270,18 @@ $('#fans').live('click',function(){
 		}
 });
 
-$('[name=guanzhu]').live('click',function(){
-	var guanId = $(this).attr("value");
-	var relation = $(this).text();
+$('body').on('click','[name=guanzhu]',function(){
+	var guanId = $(this).val();
+	var relation = $(this).html();
 	var $a=$(this);
 	if(relation=="取消关注"){
 		$.ajax({
 			type:'post',
 			url:'quguan',
 			data:{guanId:guanId},
-			dataType:'json',
+			dataType:'text',
 			success:function(){
-				$a.text("关注");
+				$a.html("关注");				
 			}
 		});
 		//return false;//  js方法如果想终止, 写return  false;
@@ -292,16 +291,17 @@ $('[name=guanzhu]').live('click',function(){
 			type:'post',
 			url:'guanzhu',
 			data:{guanId:guanId},
-			dataType:'json',
+			dataType:'text',
 			success:function(){
-				$a.text("取消关注");
+			
+				$a.html("取消关注");
 			}
 		});		
 	}
 });
 
 
-$('[name=otherId]').live('click',function(){
+$('body').on('click','[name=otherId]',function(){
 	var otherId = $(this).attr("value");
 	$(location).attr("href","other?"+"otherId="+otherId);
 	});
