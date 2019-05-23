@@ -177,7 +177,7 @@ public class NewsDaoImpl implements NewsDao{
 					news.setType(rs.getString(7));
 					news.setComments(rs.getInt(8));
 					news.setNickname(rs.getString(9));
-					
+					news.setUrl(rs.getString(10));
 					newsList.add(news);
 				}
 			} catch (SQLException e) {
