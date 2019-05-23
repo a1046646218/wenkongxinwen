@@ -21,9 +21,8 @@ public class checkUserFollowing extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int user_id = Integer.parseInt(request.getParameter("userid"));
 		User u = (User) request.getSession().getAttribute("user");
-		System.out.println(u.getUserId());
 		System.out.println(user_id);
-		if(u.getUserId()==user_id) {
+		if(u==null||u.getUserId()==user_id) {
 			System.out.println("ПаµИ");
 			response.getWriter().print("error");
 		}else {

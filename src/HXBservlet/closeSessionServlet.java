@@ -3,6 +3,7 @@ package HXBservlet;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,8 +28,16 @@ public class closeSessionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("进入了closeSessionServlet的doGet方法");
-		request.getSession().setAttribute("userid", null);
-		response.sendRedirect("main.html");
+		request.getSession().setAttribute("user", null);
+		Cookie[] cookies = request.getCookies();
+		for(Cookie c :cookies) {
+			String name = c.getName();
+			if("userName".equals(c.getName())){
+				c.setMaxAge(0);
+				response.addCookie(c);
+			}
+		}
+		response.sendRedirect("main.jsp");
 	}
 
 	/**

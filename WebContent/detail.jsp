@@ -43,7 +43,7 @@
 
                           <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav scrollable-menu">
-                            <li><a href="main.html">首页</a></li>
+                            <li><a href="main.jsp">首页</a></li>
                             <c:if test="${(!empty user)&&(user.type==1)}">
                             	<li><a href="#news">发布新闻</a></li>
                             </c:if>
@@ -61,7 +61,7 @@
                         	</c:if>
                         	<c:if  test="${empty user}">
                         		<li>
-                        			<div id="User-Login"><a href="TestMain2">登录</a><a href="#fashion">注册</a></div> 
+                        			<div id="User-Login"><a href="login.jsp">登录</a><a href="register.jsp">注册</a></div> 
                         		</li> 
                         	</c:if>
                         </ul>
@@ -80,7 +80,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <div class="single-page-post">
-                            <img class="img-fluid" src="img/single.jpg" alt="">
+                            <img class="img-fluid" src="img/single.jpg" alt="" >
                             <div class="top-wrapper " id="mynews" name="${news.newsId}">
                                                       <!--
                                                       	作者：offline
@@ -93,7 +93,7 @@
                                     </h2>
                                     <div class="col-lg-4 col-md-12 right-side d-flex justify-content-end">
                                         <div class="desc">
-                                           <h2 id="nickname">${news.nickname}</h2>
+                                           <h2 id="nickname" tohome="${news.userId}" >${news.nickname}</h2>
                                         </div>
                                         <div class="user-img">
                                             <img src="img/user.jpg" alt="">
@@ -224,7 +224,7 @@
                     <div id="ohteruser" class="col-lg-4 sidebar-area ">
                         <div class="single_widget about_widget">
                             <img src="img/asset/s-img.jpg" alt="">
-                            <h2 class="text-uppercase">Adele Gonzalez</h2>
+                            <h2 class="text-uppercase" tohome="${news.userId}">Adele Gonzalez</h2>
                             <p>
                                 MCSE boot camps have its supporters and
                                 its detractors. Some people do not understand why you should have to spend money
@@ -398,7 +398,7 @@ $(document).ready(function(){
                                                         "<img src=\"img/asset/c1.jpg\" alt=\"\">"+
                                                     "</div>"+
                                                    " <div class=\"desc col-lg-10\">"+
-                                                        "<h5><a href=\"#\">"+jsoncomment[i].com.nickName+"</a></h5>"+
+                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment[i].com.userId+"\">"+jsoncomment[i].com.nickName+"</a></h5>"+
                                                         "<br>"+
                                                         "<p class=\"comment\">"+
                                                             jsoncomment[i].com.content+
@@ -536,7 +536,7 @@ $(document).ready(function(){
                                                         "<img src=\"img/asset/c2.jpg\">"+
                                                     "</div>"+
                                                     "<div class=\"desc col-lg-10\">"+
-                                                        "<h5><a href=\"#\">"+jsoncomment[i].nickName+"</a></h5>"+
+                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment[i].userId+"\">"+jsoncomment[i].nickName+"</a></h5>"+
                                                         "<p class=\"date\">"+jsoncomment[i].remarkstr+"</p>"+
                                                         "<p class=\"comment\">"+
                                                             jsoncomment[i].content+
@@ -586,7 +586,7 @@ $(document).ready(function(){
                                                         "<img src=\"img/asset/c2.jpg\" alt=\"\">"+
                                                     "</div>"+
                                                    " <div class=\"desc col-lg-10\">"+
-                                                        "<h5><a href=\"#\">"+jsoncomment.nickName+"</a></h5>"+
+                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment.userId+"\">"+jsoncomment.nickName+"</a></h5>"+
                                                         "<br>"+
                                                         "<p class=\"comment\">"+
                                                             jsoncomment.content+
@@ -659,7 +659,7 @@ $(document).ready(function(){
                                                         "<img src=\"img/asset/c2.jpg\">"+
                                                     "</div>"+
                                                     "<div class=\"desc col-lg-10\">"+
-                                                        "<h5><a href=\"#\">"+jsoncomment.nickName+"</a></h5>"+
+                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment[i].userId+"\">"+jsoncomment.nickName+"</a></h5>"+
                                                         "<p class=\"date\">"+jsoncomment.remarkstr+"</p>"+
                                                         "<p class=\"comment\">"+
                                                             jsoncomment.content+
@@ -746,7 +746,7 @@ $(document).ready(function(){
                                                         "<img src=\"img/asset/c2.jpg\">"+
                                                     "</div>"+
                                                     "<div class=\"desc col-lg-10\">"+
-                                                        "<h5><a href=\"#\">"+jsoncomment.nickName+"</a></h5>"+
+                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment[i].userId+"\">"+jsoncomment.nickName+"</a></h5>"+
                                                         "<p class=\"date\">"+jsoncomment.remarkstr+"</p>"+
                                                         "<p class=\"comment\">"+
                                                             jsoncomment.content+
@@ -775,6 +775,16 @@ $(document).ready(function(){
 			
 		}
 	});
+	
+	 $('body').on('click','[tohome]',function(){
+    		var otheruserId = $(this).attr("tohome");
+    		alert(otheruserId);
+    		$(location).attr("href","clickHeadToHomeServlet?"+"otheruserId="+otheruserId); 
+    	
+    });
+	
+	
+	
 });
 </script>
     </html>

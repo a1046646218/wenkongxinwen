@@ -44,7 +44,7 @@
 
                       <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav scrollable-menu">
-                            <li><a href="main.html">首页</a></li>
+                            <li><a href="main.jsp">首页</a></li>
                             <c:if test="${(!empty user)&&(user.type==1)}">
                             	<li><a href="#news">发布新闻</a></li>
                             </c:if>
@@ -62,7 +62,7 @@
                         	</c:if>
                         	<c:if  test="${empty user}">
                         		<li>
-                        			<div id="User-Login"><a href="TestMain2">登录</a><a href="#fashion">注册</a></div> 
+                        			<div id="User-Login"><a href="login.jsp">登录</a><a href="register.jsp">注册</a></div> 
                         		</li> 
                         	</c:if>
                         </ul>
@@ -94,9 +94,9 @@
                     <div class="single_widget search_widget">
                         <div id="imaginary_container"> 
                             <div class="input-group stylish-input-group">
-                                <input type="text" class="form-control"  placeholder="Search" >
+                                <input type="text" class="form-control"  placeholder="Search" id="TFsearchtxt">
                                 <span class="input-group-addon">
-                                    <button type="submit">
+                                    <button type="submit" id="TFsearchbutton">
                                         <span class="lnr lnr-magnifier"></span>
                                     </button>  
                                 </span>
@@ -272,7 +272,7 @@
                         <img src="img/asset/l1.jpg" alt="">
                     </div>
                     <div class="detail">
-                        <a href="#"><h4 class="pb-20">{{value.titile}}</h4></a>
+                        <a href="#"><h4 class="pb-20" id="enternewsdetail" name="{{value.newsId}}">{{value.titile}}</h4></a>
                         <p>
                            {{value.content}}
                         </p> 
@@ -303,6 +303,15 @@
         				$("#addNews").before(newContentNews);
         			} 
         		});
+        	});
+        	$('#TFsearchbutton').click(function(){
+        			var txt = $('#TFsearchtxt').val();
+        			if(txt==""||txt=="Search"){
+        				
+        			}else{
+        				$(location).attr("href","EnterSearchServlet?"+"searchtxt="+txt); 
+        			}
+        				
         	});
         	$("li[id='changeNews']").click(function(){
         		var contentNumber = $("div[name='content']").length;
@@ -338,6 +347,12 @@
             			} 
         			});
             	});
+             $('body').on('click','#enternewsdetail',function(){
+    				var searchnew_id = $(this).attr("name");
+    				alert(searchnew_id);
+    				$(location).attr("href","EnterNewdetailServlet?"+"searchnew_id="+searchnew_id); 
+    	
+    			});
    
             </script>
     </body>

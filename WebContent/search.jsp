@@ -45,7 +45,7 @@
 
                       <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav scrollable-menu">
-                            <li><a href="main.html">首页</a></li>
+                            <li><a href="main.jsp">首页</a></li>
                             <c:if test="${(!empty user)&&(user.type==1)}">
                             	<li><a href="#news">发布新闻</a></li>
                             </c:if>
@@ -63,7 +63,7 @@
                         	</c:if>
                         	<c:if  test="${empty user}">
                         		<li>
-                        			<div id="User-Login"><a href="TestMain2">登录</a><a href="#fashion">注册</a></div> 
+                        			<div id="User-Login"><a href="login.jsp">登录</a><a href="register.jsp">注册</a></div> 
                         		</li> 
                         	</c:if>
                         </ul>
@@ -175,7 +175,7 @@
                 </div>
             </footer>
             <!-- End footer Area -->        
-
+			<div id="searchtxt" style="display: none;">${searchtxt}</div>
             <script src="js/vendor/jquery-2.2.4.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
             <script src="js/vendor/bootstrap.min.js"></script>
@@ -189,6 +189,49 @@
     </html>
 
 <script>	
+	
+	
+	$(document).ready(function(){
+		var searchtxt = $('#searchtxt').text();
+		alert(searchtxt);
+        $.ajax({
+            type: 'post', 
+            url: "searchservlet",
+            data:{"newsinfo": searchtxt,"newsIndex":$("div[uid]").length}, 
+            dataType:'text', 
+            success: function(result){
+						 $("#result").empty();	 	
+							var jsonnews = JSON.parse(result);
+							for(var i=jsonnews.length-1;i>=0;i--){
+							var str="<div class=\"single-list flex-row d-flex\" id=\"firstnewslist\">"+
+                               " <div class=\"thumb\">"+
+                                    "<div class=\"date\">"+
+                                       "<span>20</span><br>Dec"+
+                                    "</div>"+
+                                    "<img src=\"img/asset/l4.jpg\" alt=\"\">"+
+                               "</div>"+
+                               "<div class=\"detail\">"+
+                                    "<a href=\"#\"><h4 class=\"pb-20\" name=\""+jsonnews[i].newsId+"\" id=\"enternewsdetail\">"+jsonnews[i].titile +"<br>"+
+                                    jsonnews[i].nickname+"</h4></a>"+
+                                    "<p>"+ jsonnews[i].content+"</p>"+
+                                    "<p class=\"footer pt-20\">"+
+                                    "<i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i>"+
+                                    "<a href=\"#\">"+jsonnews[i].like+" Likes</a>"+   
+                                    "<i class=\"ml-20 fa fa-comment-o\" aria-hidden=\"true\"></i>"+
+                                    "<a href=\"#\">"+jsonnews[i].comments+" Comments</a>"+
+                                    "</p>"+
+                                "</div>"+
+                            "</div>";    
+							$("#result").append($(str));
+            				}
+            },
+            error:function(result){
+				alert("éè¯¯");
+			}
+        });
+      });	
+
+	
 	$("#search").click(function() {
 		
         var info = $("#info").val();
@@ -211,7 +254,7 @@
                                     "<img src=\"img/asset/l4.jpg\" alt=\"\">"+
                                "</div>"+
                                "<div class=\"detail\">"+
-                                    "<a href=\"#\"><h4 class=\"pb-20\">"+jsonnews[i].titile +"<br>"+
+                                    "<a href=\"#xxx\"><h4 class=\"pb-20\" name=\""+jsonnews[i].newsId+"\" id=\"enternewsdetail\">"+jsonnews[i].titile +"<br>"+
                                     jsonnews[i].nickname+"</h4></a>"+
                                     "<p>"+ jsonnews[i].content+"</p>"+
                                     "<p class=\"footer pt-20\">"+
@@ -233,5 +276,11 @@
        else{
     	   alert("è¾å¥æç´¢åå®¹");
        }
+    });
+    $('body').on('click','#enternewsdetail',function(){
+    	var searchnew_id = $(this).attr("name");
+    	alert(searchnew_id);
+    	$(location).attr("href","EnterNewdetailServlet?"+"searchnew_id="+searchnew_id); 
+    	
     });
 	</script>
