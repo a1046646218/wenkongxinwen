@@ -133,16 +133,27 @@
                             </div>
                             <div class="bottom-wrapper">
                                 <div class="row">
-                                    <div class="col-lg-4 single-b-wrap col-md-12">
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                        <span  id="zan">${news.favorites}</span>人点赞
-                                        <!--
+                                    <div class="col-lg-3 single-b-wrap col-md-12">
+                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                        <span id="zan">${news.like}</span>人点赞
+                                        <!-- fa-thumbs-up   点赞了
+                                        	fa-thumbs-o-up 没点赞
                                                       	作者：offline
                                                       	时间：2019-05-20
                                                       	喜欢人
                                                       -->
                                     </div>
-                                    <div class="col-lg-4 single-b-wrap col-md-12">
+                                    <div class="col-lg-3 single-b-wrap col-md-12">
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <span id="isfavorite">${news.favorites}</span>人收藏
+                                        <!--fa-star-o 没收藏
+                                            fa fa-star  点收藏
+                                                      	作者：offline
+                                                      	时间：2019-05-20
+                                                      	喜欢人
+                                                      -->
+                                    </div>
+                                    <div class="col-lg-3 single-b-wrap col-md-12">
                                         <i class="fa fa-comment-o" aria-hidden="true"></i> 
                                         <span id="cha">${news.comments}</span>人评论
                                         <!--
@@ -151,7 +162,7 @@
                                                       	评论人
                                                       -->
                                     </div>
-                                    <div class="col-lg-4 single-b-wrap col-md-12">
+                                    <div class="col-lg-3 single-b-wrap col-md-12">
                                         <ul class="social-icons">
                                             <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                             <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -315,6 +326,23 @@ $(document).ready(function(){
 		var new_id = $('#mynews').attr("name");
 		$.ajax({
 			type:"get",
+			url:"checkLikeAndFarvoriteServlet",
+			context:document.body,
+			dataType:"text",
+			data:"new_id="+new_id,
+			success: function(result){
+				var jsoncomment = JSON.parse(result);
+				if(jsoncomment[0]=="1"){
+					$('#zan').prev().attr("class","fa fa-thumbs-up");
+				}
+				if(jsoncomment[1]=="1"){
+					$('#isfavorite').prev().attr("class","fa fa-star");
+				}
+				
+			}
+		});
+		$.ajax({
+			type:"get",
 			url:"getCommentsListServlet",
 			context:document.body,
 			dataType:"text",
@@ -330,11 +358,11 @@ $(document).ready(function(){
 				}
 				var str = "<div class=\"comment-list\" id=\"itisfirst\"  name=\""+jsoncomment[i].com.commentId+"\">"+
                                             "<div class=\"single-comment justify-content-between d-flex\">"+
-                                                "<div class=\"user justify-content-between d-flex\">"+
-                                                    "<div class=\"thumb\">"+
+                                                "<div class=\"user justify-content-between d-flex col-lg-10\">"+
+                                                    "<div class=\"thumb col-lg-2\">"+
                                                         "<img src=\"img/asset/c1.jpg\" alt=\"\">"+
                                                     "</div>"+
-                                                   " <div class=\"desc\">"+
+                                                   " <div class=\"desc col-lg-10\">"+
                                                         "<h5><a href=\"#\">"+jsoncomment[i].com.nickName+"</a></h5>"+
                                                         "<br>"+
                                                         "<p class=\"comment\">"+
@@ -346,7 +374,7 @@ $(document).ready(function(){
                                                         	"&nbsp;&nbsp; <span id=\"bt_chaer\">查看评论</span>&nbsp;(<span>"+jsoncomment[i].com.reviews+"</span>) "+
                                                     "</div>"+
                                                 "</div>"+
-                                                "<div class=\"reply-btn\">"+
+                                                "<div class=\"reply-btn col-lg-2\" >"+
                                                        "<span id=\"yijihuifu\" class=\"btn-reply text-uppercase\">回复</span>" +
                                                 "</div>"+
                                             "</div>"+
@@ -359,6 +387,39 @@ $(document).ready(function(){
 				}
 			}			
 		});
+	$('#zan').prev().click(function(){	
+		$.ajax({
+			type:"get",
+			url:"addLikeNewsAjaxServlet",
+			context:document.body,
+			dataType:"text",
+			data:"new_id="+new_id,
+			success: function(result){
+				if(result=="1"){
+					$('#zan').prev().attr("class","fa fa-thumbs-up");
+					$('#zan').text(parseInt($('#zan').text())+1);
+				}
+			}
+		});
+	
+	});
+	$('#isfavorite').prev().click(function(){
+		$.ajax({
+			type:"get",
+			url:"addFavoriteNewAjaxServlet",
+			context:document.body,
+			dataType:"text",
+			data:"new_id="+new_id,
+			success: function(result){
+				if(result=="1"){
+					$('#isfavorite').prev().attr("class","fa fa-star");
+					$('#isfavorite').text(parseInt($('#isfavorite').text())+1);
+				}
+				
+			}
+		});
+	
+	});
 	$('body').on("click","#bt_zan",function(){
 		var $zan_num = $(this).next();
 		var commentId = $(this).parent().parent().parent().parent().attr("name");
@@ -404,14 +465,14 @@ $(document).ready(function(){
 				
 						if(jsoncomment.length>0){
 								for(var i=0;i<jsoncomment.length;i++){
-										var str = "<div class=\"comment-list left-padding\" id=\"itissecond\" name=\""+jsoncomment[i].reviewId+"\">"+
+										var str = "<div class=\"comment-list \" id=\"itissecond\" name=\""+jsoncomment[i].reviewId+"\">"+
                                             //在这里哦
                                             "<div class=\"single-comment justify-content-between d-flex\">"+
-                                                "<div class=\"user justify-content-between d-flex\">"+
-                                                    "<div class=\"thumb\">"+
+                                                "<div class=\"user justify-content-between d-flex col-lg-8 ml-50\">"+
+                                                    "<div class=\"thumb col-lg-2\">"+
                                                         "<img src=\"img/asset/c2.jpg\">"+
                                                     "</div>"+
-                                                    "<div class=\"desc\">"+
+                                                    "<div class=\"desc col-lg-10\">"+
                                                         "<h5><a href=\"#\">"+jsoncomment[i].nickName+"</a></h5>"+
                                                         "<p class=\"date\">"+jsoncomment[i].remarkstr+"</p>"+
                                                         "<p class=\"comment\">"+
@@ -419,7 +480,7 @@ $(document).ready(function(){
                                                         "</p>"+
                                                     "</div>"+
                                                 "</div>"+
-                                                "<div class=\"reply-btn\" >"+
+                                                "<div class=\"reply-btn col-lg-2\" >"+
                                                        "<span  id=\"erjihuifu\" class=\"btn-reply text-uppercase\">回复</span>" +
                                                 "</div>"+
                                             "</div>"+
@@ -457,11 +518,11 @@ $(document).ready(function(){
 					var jsoncomment = JSON.parse(result);
 				var str = "<div class=\"comment-list\" id=\"itisfirst\" name=\""+jsoncomment.commentId+"\">"+
                                             "<div class=\"single-comment justify-content-between d-flex\">"+
-                                                "<div class=\"user justify-content-between d-flex\">"+
-                                                    "<div class=\"thumb\">"+
+                                                "<div class=\"user justify-content-between d-flex col-lg-10\" >"+
+                                                    "<div class=\"thumb col-lg-2\">"+
                                                         "<img src=\"img/asset/c1.jpg\" alt=\"\">"+
                                                     "</div>"+
-                                                   " <div class=\"desc\">"+
+                                                   " <div class=\"desc col-lg-10\">"+
                                                         "<h5><a href=\"#\">"+jsoncomment.nickName+"</a></h5>"+
                                                         "<br>"+
                                                         "<p class=\"comment\">"+
@@ -473,13 +534,14 @@ $(document).ready(function(){
                                                         	"&nbsp;&nbsp; <span id=\"bt_chaer\">查看评论</span>&nbsp;(<span>"+jsoncomment.reviews+"</span>) "+
                                                     "</div>"+
                                                 "</div>"+
-                                                 "<div class=\"reply-btn\">"+
+                                                 "<div class=\"reply-btn col-lg-2\">"+
                                                        "<span id=\"yijihuifu\" class=\"btn-reply text-uppercase\">回复</span>" +
                                                 "</div>"+
                                             "</div>"+
                                         "</div>";
 					$('#firstcommentlist').prepend($(str));
 					$('#textareas').val('');
+					$('#cha').text(parseInt($('#cha').text())+1);
 				}	
 			}
 		});
@@ -526,14 +588,14 @@ $(document).ready(function(){
 											$fathercomment.next().remove();
 											
 											
-											var str = "<div class=\"comment-list left-padding\" id=\"itissecond\" name=\""+jsoncomment.reviewId+"\">"+
+											var str = "<div class=\"comment-list \" id=\"itissecond\" name=\""+jsoncomment.reviewId+"\">"+
                                             //在这里哦
                                             "<div class=\"single-comment justify-content-between d-flex\">"+
-                                                "<div class=\"user justify-content-between d-flex\">"+
-                                                    "<div class=\"thumb\">"+
+                                                "<div class=\"user justify-content-between d-flex col-lg-8 ml-50\">"+
+                                                    "<div class=\"thumb col-lg-2\">"+
                                                         "<img src=\"img/asset/c2.jpg\">"+
                                                     "</div>"+
-                                                    "<div class=\"desc\">"+
+                                                    "<div class=\"desc col-lg-10\">"+
                                                         "<h5><a href=\"#\">"+jsoncomment.nickName+"</a></h5>"+
                                                         "<p class=\"date\">"+jsoncomment.remarkstr+"</p>"+
                                                         "<p class=\"comment\">"+
@@ -541,7 +603,7 @@ $(document).ready(function(){
                                                         "</p>"+
                                                     "</div>"+
                                                 "</div>"+
-                                                "<div class=\"reply-btn\" >"+
+                                                "<div class=\"reply-btn col-lg-2\" >"+
                                                        "<span  id=\"erjihuifu\" class=\"btn-reply text-uppercase\">回复</span>" +
                                                 "</div>"+
                                             "</div>"+
@@ -613,14 +675,14 @@ $(document).ready(function(){
 											$fatherreview.next().remove();
 											
 											
-											var str = "<div class=\"comment-list left-padding\" id=\"itissecond\" name=\""+jsoncomment.reviewId+"\">"+
+											var str = "<div class=\"comment-list \" id=\"itissecond\" name=\""+jsoncomment.reviewId+"\">"+
                                             //在这里哦
                                             "<div class=\"single-comment justify-content-between d-flex\">"+
-                                                "<div class=\"user justify-content-between d-flex\">"+
-                                                    "<div class=\"thumb\">"+
+                                                "<div class=\"user justify-content-between d-flex col-lg-8 ml-50\">"+
+                                                    "<div class=\"thumb col-lg-2 \">"+
                                                         "<img src=\"img/asset/c2.jpg\">"+
                                                     "</div>"+
-                                                    "<div class=\"desc\">"+
+                                                    "<div class=\"desc col-lg-10\">"+
                                                         "<h5><a href=\"#\">"+jsoncomment.nickName+"</a></h5>"+
                                                         "<p class=\"date\">"+jsoncomment.remarkstr+"</p>"+
                                                         "<p class=\"comment\">"+
@@ -628,7 +690,7 @@ $(document).ready(function(){
                                                         "</p>"+
                                                     "</div>"+
                                                 "</div>"+
-                                                "<div class=\"reply-btn\" >"+
+                                                "<div class=\"reply-btn col-lg-2\" >"+
                                                        "<span  id=\"erjihuifu\" class=\"btn-reply text-uppercase\">回复</span>" +
                                                 "</div>"+
                                             "</div>"+
