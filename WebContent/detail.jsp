@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
     <html lang="zxx" class="no-js">
     <head>
@@ -41,28 +42,30 @@
                           </button>
 
                           <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
-                            <ul class="navbar-nav scrollable-menu">
-                                <li><a href="#home">Home</a></li>
-                                <li><a href="#news">News</a></li>
-                                <li><a href="#travel">Travel</a></li>
-                                <li><a href="#fashion">fashion</a></li>
-                                <li><a href="#team">team</a></li>
-                                <!-- Dropdown -->
-                                <li class="dropdown">
-                                  <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                    Pages
-                                  </a>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="single.html">Single</a>
-                                    <a class="dropdown-item" href="category.html">Category</a>
-                                    <a class="dropdown-item" href="search.html">Search</a>
-                                    <a class="dropdown-item" href="archive.html">Archive</a>
-                                    <a class="dropdown-item" href="generic.html">Generic</a>
-                                    <a class="dropdown-item" href="elements.html">Elements</a>
-                                  </div>
-                                </li>                               
-                            </ul>
-                          </div>                        
+                        <ul class="navbar-nav scrollable-menu">
+                            <li><a href="main.html">首页</a></li>
+                            <c:if test="${(!empty user)&&(user.type==1)}">
+                            	<li><a href="#news">发布新闻</a></li>
+                            </c:if>
+                        	<c:if test="${!empty user}">
+				           <!-- Dropdown -->
+				                <li class="dropdown">
+				                  <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+				                    Ruojichong
+				                  </a>
+				                  <div class="dropdown-menu">
+				                    <a class="dropdown-item" href="single.html">个人中心</a>
+				                    <a class="dropdown-item" href="closeSessionServlet">登出</a>
+				                  </div>
+				                </li>                              		
+                        	</c:if>
+                        	<c:if  test="${empty user}">
+                        		<li>
+                        			<div id="User-Login"><a href="TestMain2">登录</a><a href="#fashion">注册</a></div> 
+                        		</li> 
+                        	</c:if>
+                        </ul>
+                      </div>                        
                     </div>
                 </nav>
             </header>
@@ -218,7 +221,7 @@
                             
                         </div>
                     </div>
-                    <div class="col-lg-4 sidebar-area ">
+                    <div id="ohteruser" class="col-lg-4 sidebar-area ">
                         <div class="single_widget about_widget">
                             <img src="img/asset/s-img.jpg" alt="">
                             <h2 class="text-uppercase">Adele Gonzalez</h2>
@@ -227,8 +230,7 @@
                                 its detractors. Some people do not understand why you should have to spend money
                             </p>
                             <div class="social-link">
-                                <a href="#"><button class="btn"><i class="fa fa-facebook" aria-hidden="true"></i> Like</button></a>
-                               
+                                <button class="btn" id="otherguanzhu">关注</button>                         
                             </div>
                         </div>
                                                                        
@@ -341,6 +343,39 @@ $(document).ready(function(){
 				
 			}
 		});
+		
+		$.ajax({
+			type:"get",
+			url:"GetUserByNewsIdAjaxServlet",
+			context:document.body,
+			dataType:"text",
+			data:"new_id="+new_id,
+			success: function(result){
+				var jsoncomment = JSON.parse(result);
+				$('#ohteruser').find('h2').text(jsoncomment.nickName);
+				$('#ohteruser').find('p').text(jsoncomment.introduction);
+				$('#ohteruser').attr("name",jsoncomment.userId);
+				$.ajax({
+					type:"get",
+					url:"checkUserFollowing",
+					context:document.body,
+					dataType:"text",
+					data:"userid="+jsoncomment.userId,
+					success: function(result){
+						if(result=="0"){
+							$('#otherguanzhu').html("关注");
+						}
+						if(result=="1"){
+							$('#otherguanzhu').html("取消关注");
+						}
+						if(result=="error"){
+							alert("sdasd");
+							$('#otherguanzhu').remove();
+						}
+					}
+				});
+			}
+		});
 		$.ajax({
 			type:"get",
 			url:"getCommentsListServlet",
@@ -387,6 +422,34 @@ $(document).ready(function(){
 				}
 			}			
 		});
+	$('body').on('click','#otherguanzhu',function(){
+		var guanId = $('#ohteruser').attr("name");
+		var relation = $(this).html();
+		var $a=$(this);
+		if(relation=="取消关注"){
+			$.ajax({
+				type:'post',
+				url:'quguan',
+				data:{guanId:guanId},
+				dataType:'text',
+				success:function(){
+					$a.html("关注");				
+				}
+			});
+			//return false;//  js方法如果想终止, 写return  false;
+		}
+		else{
+			$.ajax({
+				type:'post',
+				url:'guanzhu',
+				data:{guanId:guanId},
+				dataType:'text',
+				success:function(){			
+					$a.html("取消关注");
+				}
+			});		
+		}
+	});
 	$('#zan').prev().click(function(){	
 		$.ajax({
 			type:"get",
@@ -520,7 +583,7 @@ $(document).ready(function(){
                                             "<div class=\"single-comment justify-content-between d-flex\">"+
                                                 "<div class=\"user justify-content-between d-flex col-lg-10\" >"+
                                                     "<div class=\"thumb col-lg-2\">"+
-                                                        "<img src=\"img/asset/c1.jpg\" alt=\"\">"+
+                                                        "<img src=\"img/asset/c2.jpg\" alt=\"\">"+
                                                     "</div>"+
                                                    " <div class=\"desc col-lg-10\">"+
                                                         "<h5><a href=\"#\">"+jsoncomment.nickName+"</a></h5>"+

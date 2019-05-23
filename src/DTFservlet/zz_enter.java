@@ -20,7 +20,7 @@ public class zz_enter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ForUserService u = new ForUserService();
-		request.getSession().setAttribute("user", u.getUserByuserId(1));
+		request.getSession().setAttribute("user", u.getUserByuserId(9));
 		ForNewsListService n = new 	ForNewsListService();
 		request.setAttribute("news", n.getNewsByID(12));
 		request.getRequestDispatcher("detail.jsp").forward(request, response);

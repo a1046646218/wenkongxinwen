@@ -21,10 +21,18 @@ public class checkUserFollowing extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int user_id = Integer.parseInt(request.getParameter("userid"));
 		User u = (User) request.getSession().getAttribute("user");
-		FollowingDaoImpl Followdao = new FollowingDaoImpl();
-		int flag = Followdao.isFollowing(user_id, u.getUserId());
-		response.getWriter().print(flag);
-	
+		System.out.println(u.getUserId());
+		System.out.println(user_id);
+		if(u.getUserId()==user_id) {
+			System.out.println("相等");
+			response.getWriter().print("error");
+		}else {
+			System.out.println("不相等");
+			FollowingDaoImpl Followdao = new FollowingDaoImpl();
+			int flag = Followdao.isFollowing(user_id, u.getUserId());
+			response.getWriter().print(flag);
+		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

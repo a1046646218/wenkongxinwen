@@ -1,6 +1,7 @@
 package neu.edu.service;
 
 import neu.edu.dao.UserDao;
+import neu.edu.dao.impl.NewsDaoImpl;
 import neu.edu.dao.impl.UserDaoImpl;
 import neu.edu.entity.User;
 
@@ -33,6 +34,15 @@ public class ForUserService {
 	 * */
 	public User getUserByuserId(int userId) {
 		User u = userDao.getUserByuserId(userId);
+		return u;
+	}
+	/**
+	 * 根据new_id找到新闻的发布user
+	 * */
+	public User getUserBynewId(int new_id) {
+		NewsDaoImpl lmp = new NewsDaoImpl();
+		int user_id = lmp.getNewsByID(new_id).getUserId();
+		User u = userDao.getUserByuserId(user_id);
 		return u;
 	}
 	
