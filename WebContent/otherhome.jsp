@@ -262,6 +262,7 @@
 	$('body').on("click","#showxin",function() {
 			$(this).parent().addClass("active");
 			$(this).parent().siblings().removeClass("active");
+			$("#div2").hide();
 			$('#listcontent').empty();
 			$.ajax({
 					type : "post",
@@ -310,6 +311,7 @@
 		$(this).parent().addClass("active");
 		$(this).parent().siblings().removeClass("active");
 		$("#div2").hide();
+		$('#listcontent').empty();
 		$.ajax({
 		      type : "post",
 			  url : "forfavoriteListByUserIDServlet",
