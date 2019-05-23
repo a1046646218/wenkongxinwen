@@ -1,7 +1,7 @@
-
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<%@ page language="java" import="java.util.*"
-	contentType="text/html;charset=UTF-8"%>
 <head>
 <!-- Mobile Specific Meta -->
 <meta name="viewport"
@@ -40,44 +40,43 @@
 
 	<!-- Start Header Area -->
 	<header class="default-header">
-		<nav class="navbar navbar-expand-lg navbar-light">
-			<div id="type" style="display: none;">${type}</div>
-			<div class="container">
-				<a class="navbar-brand" href="index.html"> <img
-					src="img/logo.png" alt="">
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                      <a class="navbar-brand" href="index.html">
+                        <img src="img/logo.png" alt="">
+                      </a>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
 
-				<div
-					class="collapse navbar-collapse justify-content-end align-items-center"
-					id="navbarSupportedContent">
-					<ul class="navbar-nav scrollable-menu">
-						<li><a href="#home">Home</a></li>
-						<li><a href="#news">News</a></li>
-						<li><a href="#travel">Travel</a></li>
-						<li><a href="#fashion">fashion</a></li>
-						<li><a href="#team">team</a></li>
-						<!-- Dropdown -->
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							id="navbardrop" data-toggle="dropdown"> Pages </a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="single.html">Single</a> <a
-									class="dropdown-item" href="category.html">Category</a> <a
-									class="dropdown-item" href="search.html">Search</a> <a
-									class="dropdown-item" href="archive.html">Archive</a> <a
-									class="dropdown-item" href="generic.html">Generic</a> <a
-									class="dropdown-item" href="elements.html">Elements</a>
-							</div></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+                      <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                        <ul class="navbar-nav scrollable-menu">
+                            <li><a href="main.html">首页</a></li>
+                            <c:if test="${(!empty user)&&(user.type==1)}">
+                            	<li><a href="#news">发布新闻</a></li>
+                            </c:if>
+                        	<c:if test="${!empty user}">
+				           <!-- Dropdown -->
+				                <li class="dropdown">
+				                  <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+				                    Ruojichong
+				                  </a>
+				                  <div class="dropdown-menu">
+				                    <a class="dropdown-item" href="single.html">个人中心</a>
+				                    <a class="dropdown-item" href="closeSessionServlet">登出</a>
+				                  </div>
+				                </li>                              		
+                        	</c:if>
+                        	<c:if  test="${empty user}">
+                        		<li>
+                        			<div id="User-Login"><a href="TestMain2">登录</a><a href="#fashion">注册</a></div> 
+                        		</li> 
+                        	</c:if>
+                        </ul>
+                      </div>                        
+                </div>
+            </nav>
+        </header>
 	<!-- End Header Area -->
 
 
@@ -99,13 +98,14 @@
 							<span id="myusertype">${userother.type}</span> <br>
 							<p>${userother.introduction}</p>
 							<div class="social-link">
-								<a href="#"><button class="btn">
-										<i class="fa fa-facebook" aria-hidden="true"></i>${userother.followings}
-										Like
-									</button></a> <a href="#"><button class="btn">
+								<a href="#"><button class="btn" name="guanzhu" value="${userother.userId}">
+									<!-- 	<i class="fa fa-facebook" aria-hidden="true"></i> -->
+										取消关注
+									</button></a> 
+									<%-- <a href="#"><button class="btn">
 										<i class="fa fa-twitter" aria-hidden="true"></i>${userother.followers}
 										follow
-									</button></a>
+									</button></a> --%>
 							</div>
 						</div>
 					</div>
@@ -243,7 +243,22 @@
 		$('#showxin').hide();
 		$('#showxin').next().hide();
 	}
-
+	$.ajax({
+		type:"get",
+		url:"checkUserFollowing",
+		context:document.body,
+		dataType:"text",
+		data:"userid="+userid,
+		success: function(result){
+			if(result=="0"){
+				var $a=$('[name=guanzhu]').html("关注");
+			}
+			if(result=="1"){
+				var $a=$('[name=guanzhu]').html("取消关注");
+			}
+			
+		}
+	});
 	$('body').on("click","#showxin",function() {
 			$(this).parent().addClass("active");
 			$(this).parent().siblings().removeClass("active");
@@ -342,35 +357,35 @@
 	$(this).parent().siblings().removeClass("active");
 	$('#div2').show();	
 	$('#listcontent').empty();
-	/* var nickname = $('#nickname').val();
-	var str = "<div class=\"single-list flex-row d-flex\" id=\"firstnewslist\">"
-		+ " <div class=\"thumb\">"
-    	+ "<div class=\"date\">"
-		+ "<span>20</span><br>Dec"
-		+ "</div>"
-		+ "<img src=\"img/asset/l4.jpg\" alt=\"\">"
-		+ "</div>"
-		+ "<div class=\"detail\">"
-		+ "<a href=\"#\"><h4 class=\"pb-20\">"
-		+ nickname
-		+ "<br>"
-		+ usertype
-		+ "</h4></a>"
-    	+ "<p>"
-		+1111
-		+ "</p>"
-		+ "<p class=\"footer pt-20\">"
-		+ "<i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i>"
-		+ "<a href=\"#\">"
-		+ 1111
-		+ " Likes</a>"
-		+ "<i class=\"ml-20 fa fa-comment-o\" aria-hidden=\"true\"></i>"
-		+ "<a href=\"#\">"
-		+ 1111
-		+ " Comments</a>"
-		+ "</p>"
-		+ "</div>" + "</div>";
-		$('#listcontent').html($(str)); */
+	});
+	
+	$('body').on('click','[name=guanzhu]',function(){
+		var guanId = $(this).val();
+		var relation = $(this).html();
+		var $a=$(this);
+		if(relation=="取消关注"){
+			$.ajax({
+				type:'post',
+				url:'quguan',
+				data:{guanId:guanId},
+				dataType:'text',
+				success:function(){
+					$a.html("关注");				
+				}
+			});
+			//return false;//  js方法如果想终止, 写return  false;
+		}
+		else{
+			$.ajax({
+				type:'post',
+				url:'guanzhu',
+				data:{guanId:guanId},
+				dataType:'text',
+				success:function(){			
+					$a.html("取消关注");
+				}
+			});		
+		}
 	});
 </script>
 

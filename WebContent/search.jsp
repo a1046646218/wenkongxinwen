@@ -1,3 +1,7 @@
+   <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   
     <!DOCTYPE html>
     <html lang="zxx" class="no-js">
     <head>
@@ -29,42 +33,44 @@
         <body>
 
             <!-- Start Header Area -->
-            <header class="default-header">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <div class="container">
-                          <a class="navbar-brand" href="index.html">
-                            <img src="img/logo.png" alt="">
-                          </a>
-                          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                          </button>
+           <header class="default-header">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                      <a class="navbar-brand" href="index.html">
+                        <img src="img/logo.png" alt="">
+                      </a>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
 
-                          <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
-                            <ul class="navbar-nav scrollable-menu">
-                                <li><a href="#home">Home</a></li>
-                                <li><a href="#news">News</a></li>
-                                <li><a href="#travel">Travel</a></li>
-                                <li><a href="#fashion">fashion</a></li>
-                                <li><a href="#team">team</a></li>
-                                <!-- Dropdown -->
-                                <li class="dropdown">
-                                  <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                    Pages
-                                  </a>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="single.html">Single</a>
-                                    <a class="dropdown-item" href="category.html">Category</a>
-                                    <a class="dropdown-item" href="search.html">Search</a>
-                                    <a class="dropdown-item" href="archive.html">Archive</a>
-                                    <a class="dropdown-item" href="generic.html">Generic</a>
-                                    <a class="dropdown-item" href="elements.html">Elements</a>
-                                  </div>
-                                </li>                               
-                            </ul>
-                          </div>                        
-                    </div>
-                </nav>
-            </header>
+                      <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                        <ul class="navbar-nav scrollable-menu">
+                            <li><a href="main.html">首页</a></li>
+                            <c:if test="${(!empty user)&&(user.type==1)}">
+                            	<li><a href="#news">发布新闻</a></li>
+                            </c:if>
+                        	<c:if test="${!empty user}">
+				           <!-- Dropdown -->
+				                <li class="dropdown">
+				                  <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+				                    Ruojichong
+				                  </a>
+				                  <div class="dropdown-menu">
+				                    <a class="dropdown-item" href="single.html">个人中心</a>
+				                    <a class="dropdown-item" href="closeSessionServlet">登出</a>
+				                  </div>
+				                </li>                              		
+                        	</c:if>
+                        	<c:if  test="${empty user}">
+                        		<li>
+                        			<div id="User-Login"><a href="TestMain2">登录</a><a href="#fashion">注册</a></div> 
+                        		</li> 
+                        	</c:if>
+                        </ul>
+                      </div>                        
+                </div>
+            </nav>
+        </header>
             <!-- End Header Area -->
 
             <!-- Start top-section Area -->
@@ -220,12 +226,12 @@
             }
             },
             error:function(result){
-				alert("错误");
+				alert("éè¯¯");
 			}
         })
        }
        else{
-    	   alert("输入搜索内容");
+    	   alert("è¾å¥æç´¢åå®¹");
        }
     });
 	</script>

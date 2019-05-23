@@ -34,6 +34,8 @@ public class foruserByUserid extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8"); 
 		  response.setCharacterEncoding("utf-8"); 
+		  ForUserService u = new ForUserService();
+		  request.getSession().setAttribute("user", u.getUserByuserId(1));
 		  int userotherid = Integer.parseInt(request.getParameter("id"));
 		  User userother=new ForUserService().getUserByuserId(userotherid);
 		  request.setAttribute("userother", userother);
