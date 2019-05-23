@@ -46,7 +46,7 @@
 
                                 <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav scrollable-menu">
-                            <li><a href="main.html">首页</a></li>
+                            <li><a href="main.jsp">首页</a></li>
                             <c:if test="${(!empty user)&&(user.type==1)}">
                             	<li><a href="#news">发布新闻</a></li>
                             </c:if>
@@ -64,7 +64,7 @@
                         	</c:if>
                         	<c:if  test="${empty user}">
                         		<li>
-                        			<div id="User-Login"><a href="TestMain2">登录</a><a href="#fashion">注册</a></div> 
+                        			<div id="User-Login"><a href="login.jsp">登录</a><a href="register.jsp">注册</a></div> 
                         		</li> 
                         	</c:if>
                         </ul>
@@ -301,7 +301,7 @@ $('body').on('click','[name=guanzhu]',function(){
 
 $('body').on('click','[name=otherId]',function(){
 	var otherId = $(this).attr("value");
-	$(location).attr("href","other?"+"otherId="+otherId);
+	$(location).attr("href","clickHeadToHomeServlet?"+"otheruserId="+otherId);
 	});
 	
 });
