@@ -282,7 +282,7 @@
 							+ "<img src=\"img/asset/l4.jpg\" alt=\"\">"
 							+ "</div>"
 							+ "<div class=\"detail\">"
-							+ "<a href=\"#\"><h4 class=\"pb-20\">"
+							+ "<a href=\"#\"><h4 class=\"pb-20\" name=\""+jsonnews[i].newsId+" \"id=\"enternewsdetail\">"
 							+ jsonnews[i].titile
 							+ "<br>"
 				    		+ jsonnews[i].nickname
@@ -329,7 +329,7 @@
 							+ "<img src=\"img/asset/l4.jpg\" alt=\"\">"
 							+ "</div>"
 							+ "<div class=\"detail\">"
-							+ "<a href=\"#\"><h4 class=\"pb-20\">"
+							+ "<a href=\"#\"><h4 class=\"pb-20\" name=\""+jsonnews[i].newsId+"\"id=\"enternewsdetail\">"
 							+ jsonnews[i].titile
 							+ "<br>"
 				    		+ jsonnews[i].nickname
@@ -360,6 +360,18 @@
 	$('#div2').show();	
 	$('#listcontent').empty();
 	});
+	
+	
+	
+	
+	$('body').on('click','#enternewsdetail',function(){
+    		var searchnew_id = $(this).attr("name");
+    		alert(searchnew_id);
+    		$(location).attr("href","EnterNewdetailServlet?"+"searchnew_id="+searchnew_id); 
+    	
+    });
+	
+	
 	
 	$('body').on('click','[name=guanzhu]',function(){
 		var guanId = $(this).val();
