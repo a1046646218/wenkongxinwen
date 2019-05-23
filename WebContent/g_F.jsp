@@ -1,5 +1,6 @@
   <!DOCTYPE html>
     <%@ page language="java" import="java.util.*" contentType="text/html;charset=UTF-8"%> 
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
         <!-- Mobile Specific Meta -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -43,29 +44,31 @@
                             <span class="navbar-toggler-icon"></span>
                           </button>
 
-                          <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
-                            <ul class="navbar-nav scrollable-menu">
-                                <li><a href="#home">Home</a></li>
-                                <li><a href="#news">News</a></li>
-                                <li><a href="#travel">Travel</a></li>
-                                <li><a href="#fashion">fashion</a></li>
-                                <li><a href="#team">team</a></li>
-                                <!-- Dropdown -->
-                                <li class="dropdown">
-                                  <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                    Pages
-                                  </a>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="single.html">Single</a>
-                                    <a class="dropdown-item" href="category.html">Category</a>
-                                    <a class="dropdown-item" href="search.html">Search</a>
-                                    <a class="dropdown-item" href="archive.html">Archive</a>
-                                    <a class="dropdown-item" href="generic.html">Generic</a>
-                                    <a class="dropdown-item" href="elements.html">Elements</a>
-                                  </div>
-                                </li>                               
-                            </ul>
-                          </div>                        
+                                <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                        <ul class="navbar-nav scrollable-menu">
+                            <li><a href="main.html">首页</a></li>
+                            <c:if test="${(!empty user)&&(user.type==1)}">
+                            	<li><a href="#news">发布新闻</a></li>
+                            </c:if>
+                        	<c:if test="${!empty user}">
+				           <!-- Dropdown -->
+				                <li class="dropdown">
+				                  <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+				                    Ruojichong
+				                  </a>
+				                  <div class="dropdown-menu">
+				                    <a class="dropdown-item" href="single.html">个人中心</a>
+				                    <a class="dropdown-item" href="closeSessionServlet">登出</a>
+				                  </div>
+				                </li>                              		
+                        	</c:if>
+                        	<c:if  test="${empty user}">
+                        		<li>
+                        			<div id="User-Login"><a href="TestMain2">登录</a><a href="#fashion">注册</a></div> 
+                        		</li> 
+                        	</c:if>
+                        </ul>
+                      </div>                      
                     </div>
                 </nav>
             </header>
@@ -85,15 +88,10 @@
 
                         <div class="single_widget about_widget">
                             <img src="img/asset/s-img.jpg" alt="">
-                            <h2 class="text-uppercase">Adele Gonzalez</h2>
+                            <h2 class="text-uppercase">${user.nickName}</h2>
                             <p>
-                                MCSE boot camps have its supporters and
-                                its detractors. Some people do not understand why you should have to spend money
+                            ${user.introduction}
                             </p>
-                            <div class="social-link">
-                                <a href="#"><button class="btn"><i class="fa fa-facebook" aria-hidden="true"></i> Like</button></a>
-                                <a href="#"><button class="btn"><i class="fa fa-twitter" aria-hidden="true"></i> follow</button></a>
-                            </div>
                         </div>
                                                                  
                     </div>
