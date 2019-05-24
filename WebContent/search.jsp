@@ -101,25 +101,7 @@
                          <div id="result">
                          
                          </div>           
-                            <!--<div class="single-list flex-row d-flex" id="firstnewslist">
-                                <div class="thumb">
-                                    <div class="date">
-                                        <span>20</span><br>Dec
-                                    </div>
-                                    <img src="img/asset/l4.jpg" alt="">
-                                </div>
-                                <div class="detail">
-                                    <a href="#"><h4 class="pb-20">Addiction When Gambling <br>
-                                    Becomes A Problem</h4></a>
-                                    <p>
-                                        inappropriate behavior Lorem ipsum dolor sit amet, consecteturinapprop riate behavior Lorem ipsum dolor sit amet, consectetur.
-                                    </p>
-                                    <p class="footer pt-20">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
-                                    </p>
-                                </div>
-                            </div>   -->
+
                                                     
                             <div class="justify-content-center d-flex" >
                                 <a id="addNews" class="text-uppercase primary-btn loadmore-btn mt-40 mb-60" href="#"> Load More Post</a>
@@ -335,5 +317,33 @@
 	    	   alert("è¾å¥æç´¢åå®¹");
 	       }
 		});
+	</script>
+	<!--
+    	作者：HXB
+    	时间：2019-05-24
+    	描述：artTemplate模板
+    -->
+	<script type="text/html" id="module">
+		{{each list as value}}
+	    <div class="single-list flex-row d-flex" id="firstnewslist">
+	        <div class="thumb">
+	            <div class="date">
+	                <span>20</span><br>Dec
+	            </div>
+	            <img src="img/asset/l4.jpg" alt="">
+	        </div>
+	        <div class="detail">
+	            <a href="#"><h4 class="pb-20" name={{value.newsId}} id='enternewsdetail'>{{value.titile}} <br>
+	            value.nickname</h4></a>
+	            <p>
+	               {{value.content}}
+	            </p>
+	            <p class="footer pt-20">
+	            <i class="fa fa-heart-o" aria-hidden="true"></i>
+	            <a href="#">{{value.like}} Likes</a>  <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">{{value.comments}} Comments</a>
+	            </p>
+	        </div>
+	    </div>
+	    {{/each}}
 	</script>
 	
