@@ -196,4 +196,13 @@ public class NewsDaoImpl implements NewsDao{
 		int res = aa.executeIUD(sql, new Object[] {new_id});
 		return res;
 	}
+
+	@Override
+	public ArrayList<News> searchNewsListByTitle(String newsType, int newsIndex) {
+		BaseDao aa = new BaseDao();
+		String strsql= "SELECT * FROM ±íÃû WHERE name LIKE '%?%'";
+		Object[] params = new Object[] {newsType};
+		ArrayList<News> newsList = getNewsList(strsql,params);
+		return newsList;
+	}
 }
