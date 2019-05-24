@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class closeSessionServlet
  */
 @WebServlet("/closeSessionServlet")
-public class closeSessionServlet extends HttpServlet {
+public class CloseSessionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public closeSessionServlet() {
+    public CloseSessionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
