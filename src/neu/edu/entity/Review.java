@@ -55,5 +55,10 @@ public class Review {
 	public void setNickName(String nickName) {
 		NickName = nickName;
 	}
+	@Override
+	public String toString() {
+		return "Review [reviewId=" + reviewId + ", commentId=" + commentId + ", userId=" + userId + ", content="
+				+ content + ", remarkstr=" + remarkstr + ", NickName=" + NickName + "]";
+	}
 	
 }

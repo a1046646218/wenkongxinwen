@@ -14,7 +14,7 @@ public class BaseDao {
 	private String driver="com.mysql.jdbc.Driver";
 	private String url="jdbc:mysql://localhost:3306/neunews";
 	private String user="root";
-	private String pwd="root";
+	private String pwd="123456";
 	public  Connection con=null;
 	public   PreparedStatement pst =null;
 	public   ResultSet rs = null;

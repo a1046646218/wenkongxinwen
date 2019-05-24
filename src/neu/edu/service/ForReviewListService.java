@@ -19,7 +19,7 @@ public class ForReviewListService {
 	 * */
 	public ArrayList<Review> getreviewsListByNewId(int commentId){
 		ArrayList<Review> list = new ArrayList<>();
-		list = reviewDao.getReviewsListByNewId(commentId);
+		list = reviewDao.getReviewsListByCommentId(commentId);
 		return list;
 		
 	}

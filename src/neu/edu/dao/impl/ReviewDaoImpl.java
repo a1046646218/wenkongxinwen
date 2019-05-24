@@ -55,10 +55,44 @@ public class ReviewDaoImpl  implements ReviewDao {
 	 * @param commentId
 	 */
 	@Override
-	public ArrayList<Review> getReviewsListByNewId(int commentId) {
-		BaseDao aa = new BaseDao();
+	public ArrayList<Review> getReviewsListByCommentId(int commentId) {
 		String sql = "Select *from review where commentId = ?";
-		ResultSet res = aa.executeSelect(sql, new Object[] {commentId});
+		ArrayList<Review> list = getReviewsList(sql,commentId);
+		return list;
+	}
+	/**
+	 * 
+	 * 根据reviewid获取到review
+	 * 沒有找到的話返回null
+	 * 
+	 * **/
+	@Override
+	public Review getReviewById(int review_Id) {
+		String sql = "Select *from review where reviewId = ?";
+		ArrayList<Review> list = getReviewsList(sql,review_Id);
+		Review review = null;
+		if(!list.isEmpty()) {
+			review = list.get(0);
+		}
+		return review;
+	}
+
+	@Override
+	public ArrayList<Review> getReviewsListByCommentId(int commentId, int userId) {
+		String sql = "Select * from review where commentId = ? and userId != ?";
+		ArrayList<Review> list = getReviewsList(sql,commentId,userId);
+		return list;
+	}
+	
+	/**
+	 * 複用代碼
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
+	private  ArrayList<Review> getReviewsList(String sql,Object... params ){
+		BaseDao aa = new BaseDao();
+		ResultSet res = aa.executeSelect(sql,params);
 		ArrayList<Review> list = new ArrayList<>();
 		Review t = null;
 		try {
@@ -79,31 +113,6 @@ public class ReviewDaoImpl  implements ReviewDao {
 		
 		return list;
 	}
-	/**
-	 * 
-	 * 根据reviewid获取到review
-	 * 
-	 * 
-	 * **/
-	@Override
-	public Review getReviewById(int review_Id) {
-		BaseDao aa = new BaseDao();
-		String sql = "Select *from review where reviewId = ?";
-		ResultSet res = aa.executeSelect(sql, new Object[] {review_Id});
-		Review t = null;
-		try {
-			if(res.next()) {
-				int reviewId = res.getInt(1);
-				int commentId1 = res.getInt(2);
-				int userId = res.getInt(3);
-				String content = res.getString(4);
-				String remarkstr = res.getString(5);
-				String NickName = res.getString(6);
-				t = new Review(reviewId,commentId1,userId, content, remarkstr,NickName);
-			}
-		} catch (SQLException e) {
-		}
-		return t;
-	}
+
 
 }
