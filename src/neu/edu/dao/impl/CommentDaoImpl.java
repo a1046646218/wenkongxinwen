@@ -134,4 +134,11 @@ public class CommentDaoImpl  implements CommentDao{
 		int res = aa.executeIUD(sql, new Object[] {comment_id});
 		return res;
 	}
+	
+	@Override
+	public ArrayList<Comment> getCommentListByNewId(int newsId, int user_id) {
+		String sql = "Select *from comment where newsId = ? and userId != ?";
+		ArrayList<Comment> list = getCommentList(sql,newsId,user_id);
+		return list;
+	}
 }
