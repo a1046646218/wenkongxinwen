@@ -56,4 +56,9 @@ public class ForNewsListService {
 		News ne = newsDao.getNewsByID(new_id);
 		return  ne;	
 	}
+	
+	public ArrayList<News> getNewsListByTitle(String newsType,int newsIndex){
+		ArrayList<News> li = newsDao.searchNewsListByTitle(newsType, newsIndex);
+		return li;
+	}
 }

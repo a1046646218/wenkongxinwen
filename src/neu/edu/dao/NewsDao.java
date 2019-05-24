@@ -22,6 +22,7 @@ public interface NewsDao {
 	 * @param newsIdList
 	 * @return
 	 */
+	public ArrayList<News> searchNewsListByTitle(String newsType,int newsIndex);
 	public ArrayList<News> getNewsList(ArrayList<Integer> newsIdList);
 	
 	public int addNumOfFavoritetoNews(int new_id);
