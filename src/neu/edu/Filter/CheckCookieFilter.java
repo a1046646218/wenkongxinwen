@@ -45,10 +45,9 @@ public class CheckCookieFilter implements Filter {
 		System.out.println("url:-----------"+url);
 	
 			
-			Cookie[] cookies = req.getCookies();
-			if(cookies.length==0) {
+			Cookie[] cookies = req.getCookies();//null
+			if(cookies!= null) {
 				for(Cookie c :cookies) {
-					String name = c.getName();
 					if("userName".equals(c.getName())){
 						ForUserService  fus=new ForUserService ();
 						User user=fus.getUserByusername(c.getValue());
