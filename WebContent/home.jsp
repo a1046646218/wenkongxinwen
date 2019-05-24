@@ -490,11 +490,11 @@
 	
 	$('#toguanzhu').click(function(){
 		
-    	$(location).attr("href","g_F.jsp?"+"type=guanzhu"); 
+    	$(location).attr("href","connecttofensiServlet?"+"type=guanzhu"); 
 	
 	});
 	$('#tofensi').click(function(){
-		$(location).attr("href","g_F.jsp?"+"type=fans"); 
+		$(location).attr("href","connecttofensiServlet?"+"type=fans"); 
 	
 	});
 	
