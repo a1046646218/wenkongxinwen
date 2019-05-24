@@ -54,7 +54,7 @@
 				                    Ruojichong
 				                  </a>
 				                  <div class="dropdown-menu">
-				                    <a class="dropdown-item" href="single.html">个人中心</a>
+				                    <a class="dropdown-item" href="home.jsp">个人中心</a>
 				                    <a class="dropdown-item" href="closeSessionServlet">登出</a>
 				                  </div>
 				                </li>                              		
@@ -659,7 +659,7 @@ $(document).ready(function(){
                                                         "<img src=\"img/asset/c2.jpg\">"+
                                                     "</div>"+
                                                     "<div class=\"desc col-lg-10\">"+
-                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment[i].userId+"\">"+jsoncomment.nickName+"</a></h5>"+
+                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment.userId+"\">"+jsoncomment.nickName+"</a></h5>"+
                                                         "<p class=\"date\">"+jsoncomment.remarkstr+"</p>"+
                                                         "<p class=\"comment\">"+
                                                             jsoncomment.content+
@@ -746,7 +746,7 @@ $(document).ready(function(){
                                                         "<img src=\"img/asset/c2.jpg\">"+
                                                     "</div>"+
                                                     "<div class=\"desc col-lg-10\">"+
-                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment[i].userId+"\">"+jsoncomment.nickName+"</a></h5>"+
+                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment.userId+"\">"+jsoncomment.nickName+"</a></h5>"+
                                                         "<p class=\"date\">"+jsoncomment.remarkstr+"</p>"+
                                                         "<p class=\"comment\">"+
                                                             jsoncomment.content+
