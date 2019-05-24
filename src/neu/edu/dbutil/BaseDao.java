@@ -46,13 +46,13 @@ public class BaseDao {
 	 * @param st
 	 * @param rs
 	 */
-	public void closeAll(Connection con,PreparedStatement st,ResultSet rs){
+	public void closeAll(Connection con,PreparedStatement pst,ResultSet rs){
 		try {
 			if(null!=rs){
 				rs.close();
 			}
-			if (null!=st) {
-				st.close();
+			if (null!=pst) {
+				pst.close();
 			}
 			if (null!=con) {
 				con.close();
