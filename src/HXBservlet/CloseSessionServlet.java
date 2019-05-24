@@ -31,7 +31,6 @@ public class CloseSessionServlet extends HttpServlet {
 		request.getSession().setAttribute("user", null);
 		Cookie[] cookies = request.getCookies();
 		for(Cookie c :cookies) {
-			String name = c.getName();
 			if("userName".equals(c.getName())){
 				c.setMaxAge(0);
 				response.addCookie(c);
