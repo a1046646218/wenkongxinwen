@@ -104,7 +104,7 @@
 
                                                     
                             <div class="justify-content-center d-flex" >
-                                <a id="addNews" class="text-uppercase primary-btn loadmore-btn mt-40 mb-60" href="#"> Load More Post</a>
+                                <a id="addNews" class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"> Load More Post</a>
                             </div>                                                                     
                         </div>                          
                     </div>
