@@ -34,9 +34,16 @@
     </c:if>
     </div>
 	</form>
+	<div>
 	<a href="register.jsp">
 		<button type="button" class="register-tis">还有没有账号？</button>
 	</a>
+	</div>
+	<div>
+	<a href="main.jsp">
+		<button type="button" class="register-tis">回到首页</button>
+	</a>
+	</div>
 
 </div>
 <script src="login/js/jquery.min.js"></script>

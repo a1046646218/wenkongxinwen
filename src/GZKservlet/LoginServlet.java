@@ -1,6 +1,7 @@
 package GZKservlet;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import neu.edu.entity.User;
+import neu.edu.service.AddUserService;
 import neu.edu.service.ForUserService;
 /**
  * Servlet implementation class LoginServlet
@@ -25,6 +27,13 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter("userName");
 		String Password = request.getParameter("Password");	
+		AddUserService au=new AddUserService();
+		try {
+			Password=au.Md5(Password);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ForUserService  fus=new ForUserService ();
 		User user=fus.getUserByusername(userName);
 		if (user==null) 

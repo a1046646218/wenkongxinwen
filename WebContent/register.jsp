@@ -111,6 +111,11 @@ $(function(){
 				$msg.html('密码长度不能小于6');
 				return false;
 			}
+			if(Password.length>30){
+				$('#scan2').css("height","30px");
+				$msg.html('密码长度不能超过30');
+				return false;
+			}
 			return true; 
      }
      function checkPassword2(){
