@@ -21,7 +21,6 @@ public class ShowNewsCommentService {
 			ArrayList<Comment> list = commentDao.getCommentListByNewId(news.getNewsId(),user_id);
 			for(Comment comment : list) {
 				commentList.add(comment);
-				System.out.println(comment);
 			}
 		}
 		return commentList;
