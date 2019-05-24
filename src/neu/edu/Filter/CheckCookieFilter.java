@@ -44,16 +44,18 @@ public class CheckCookieFilter implements Filter {
 		String url = req.getServletPath();//获取网站根目录之后的内容,如/login?id=zhangsan
 		System.out.println("url:-----------"+url);
 	
-		
-			Cookie[] cookies = req.getCookies();
-			for(Cookie c :cookies) {
-				String name = c.getName();
-				if("userName".equals(c.getName())){
-					ForUserService  fus=new ForUserService ();
-					User user=fus.getUserByusername(c.getValue());
-					req.getSession().setAttribute("user", user);
-				}
+			
+			Cookie[] cookies = req.getCookies();//null
+			if(cookies!= null) {
+				for(Cookie c :cookies) {
+					if("userName".equals(c.getName())){
+						ForUserService  fus=new ForUserService ();
+						User user=fus.getUserByusername(c.getValue());
+						req.getSession().setAttribute("user", user);
+					}
+				}				
 			}
+			
 			
 			chain.doFilter(request, response);
 		
