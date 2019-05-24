@@ -41,6 +41,7 @@ public class QuguanServlet extends HttpServlet {
 		User user=(User)request.getSession().getAttribute("user");
 		int id=user.getUserId();
 		ForFollowingService ff=new ForFollowingService();
+		user.setFollowings(user.getFollowings()-1);
 		boolean flag=ff.RemoveGuan(id, guanId);
 		System.out.println(guanId);
 	}

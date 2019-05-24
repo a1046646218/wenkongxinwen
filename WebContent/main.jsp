@@ -55,7 +55,7 @@
 				                    Ruojichong
 				                  </a>
 				                  <div class="dropdown-menu">
-				                    <a class="dropdown-item" href="single.html">个人中心</a>
+				                    <a class="dropdown-item" href="home.jsp">个人中心</a>
 				                    <a class="dropdown-item" href="closeSessionServlet">登出</a>
 				                  </div>
 				                </li>                              		
