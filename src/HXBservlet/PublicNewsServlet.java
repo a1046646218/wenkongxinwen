@@ -24,7 +24,7 @@ import neu.edu.service.ForNewsListService;
 @MultipartConfig
 public class PublicNewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	String bathcopyPath = "C:/Users/mr.H/git/wenkongxinwen/WebContent/upload/";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		ForNewsListService forNewsListService = new ForNewsListService();
 //		String url = forNewsListService.getNewsByID(889).getUrl();
@@ -73,7 +73,7 @@ public class PublicNewsServlet extends HttpServlet {
 		
 		//3. ÉÏ´«
 		part.write(fileFinalPath);
-		String copyPath = "C:/Users/mr.H/eclipse-workspace/javawebTest/WebContent/upload/"+newFileName;
+		String copyPath = bathcopyPath+newFileName;
 		copyFile3(fileFinalPath,copyPath);
 
 		
@@ -83,7 +83,7 @@ public class PublicNewsServlet extends HttpServlet {
 		ForNewsListService forNewsListService = new ForNewsListService();
 		
 		
-		request.getSession().setAttribute("filename", forNewsListService.getNewsByID(893).getUrl());
+		request.getSession().setAttribute("filename", forNewsListService.getNewsByID(31).getUrl());
 		response.sendRedirect("upload.jsp");
 	}
 	
