@@ -40,6 +40,7 @@ public class GuanzhuServlet extends HttpServlet {
 		int guanId=Integer.parseInt(request.getParameter("guanId"));
 		User user=(User)request.getSession().getAttribute("user");
 		int id=user.getUserId();
+		user.setFollowings(user.getFollowings()+1);
 		ForFollowingService ff=new ForFollowingService();
 		boolean flag=ff.addGuan(id, guanId);
 		System.out.println(guanId);
