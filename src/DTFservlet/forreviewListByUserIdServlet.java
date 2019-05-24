@@ -12,23 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 
 import neu.edu.entity.Comment;
+import neu.edu.entity.Review;
 import neu.edu.entity.User;
-import neu.edu.service.ShowNewsCommentService;
+import neu.edu.service.SelectReviewService;
 
-/**
- * Servlet implementation class forCommentListByUserIdServlet
- */
-@WebServlet("/forCommentListByUserIdServlet")
-public class forCommentListByUserIdServlet extends HttpServlet {
+@WebServlet("/forreviewListByUserIdServlet")
+public class forreviewListByUserIdServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ShowNewsCommentService show = new ShowNewsCommentService();
+		SelectReviewService sel = new SelectReviewService();
 		User user  = (User)request.getSession().getAttribute("user");
-		ArrayList<Comment> list = show.showNewsComments(user.getUserId());
+		ArrayList<Review> list = sel.selectReview(user.getUserId());
 		String jsonString = JSON.toJSONString(list);
 		System.out.println(jsonString);
 		response.getWriter().println(jsonString);
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

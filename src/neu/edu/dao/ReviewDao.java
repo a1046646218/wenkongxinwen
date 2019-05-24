@@ -15,5 +15,8 @@ public interface ReviewDao {
 	public int addReview(Review review);
 	
 	public Review getReviewById(int reviewId);
-	public ArrayList<Review> getReviewsListByNewId(int commentId);
+	
+	public ArrayList<Review> getReviewsListByCommentId(int commentId);
+	
+	public ArrayList<Review> getReviewsListByCommentId(int commentId,int userId);
 }	

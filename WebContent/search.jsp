@@ -98,29 +98,13 @@
                                 </div>
                             </div> 
                         </div>        
-                         <div id="result">  </div>           
-                            <div class="single-list flex-row d-flex" id="firstnewslist">
-                                <div class="thumb">
-                                    <div class="date">
-                                        <span>20</span><br>Dec
-                                    </div>
-                                    <img src="img/asset/l4.jpg" alt="">
-                                </div>
-                                <div class="detail">
-                                    <a href="#"><h4 class="pb-20">Addiction When Gambling <br>
-                                    Becomes A Problem</h4></a>
-                                    <p>
-                                        inappropriate behavior Lorem ipsum dolor sit amet, consecteturinapprop riate behavior Lorem ipsum dolor sit amet, consectetur.
-                                    </p>
-                                    <p class="footer pt-20">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    <a href="#">06 Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">02 Comments</a>
-                                    </p>
-                                </div>
-                            </div>   
+                         <div id="result">
+                         
+                         </div>           
+
                                                     
-                            <div class="justify-content-center d-flex">
-                                <a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60" href="#"> Load More Post</a>
+                            <div class="justify-content-center d-flex" >
+                                <a id="addNews" class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"> Load More Post</a>
                             </div>                                                                     
                         </div>                          
                     </div>
@@ -198,9 +182,9 @@
             type: 'post', 
             url: "searchservlet",
             data:{"newsinfo": searchtxt,"newsIndex":$("div[uid]").length}, 
-            dataType:'text', 
-            success: function(result){
-						 $("#result").empty();	 	
+            dataType:'test', 
+            success: function(result){ 	
+            	 			$("#result").empty();
 							var jsonnews = JSON.parse(result);
 							for(var i=jsonnews.length-1;i>=0;i--){
 							var str="<div class=\"single-list flex-row d-flex\" id=\"firstnewslist\">"+
@@ -233,7 +217,7 @@
 
 	
 	$("#search").click(function() {
-		
+		$('#searchtxt').text($("#info").val());
         var info = $("#info").val();
         alert(info);
        if(info.length>0){
@@ -284,3 +268,82 @@
     	
     });
 	</script>
+	<!--
+    	作者：HXB
+    	时间：2019-05-24
+    	描述：
+    -->
+	<script>
+		$("#addNews").click(function(){
+		
+	        var info = $('#searchtxt').text();
+	       if(info.length>0){
+	        $.ajax({
+	            type: 'post', 
+	            url: "searchservlet",
+	            data:{"newsinfo": info,"newsIndex":$("#firstnewslist").length}, 
+	             dataType:'text', 
+	            success: function(result){ 	
+						var jsonnews = JSON.parse(result);
+						for(var i=jsonnews.length-1;i>=0;i--){
+							var str="<div class=\"single-list flex-row d-flex\" id=\"firstnewslist\">"+
+	                           " <div class=\"thumb\">"+
+	                                "<div class=\"date\">"+
+	                                   "<span>20</span><br>Dec"+
+	                                "</div>"+
+	                                "<img src=\"img/asset/l4.jpg\" alt=\"\">"+
+	                           "</div>"+
+	                           "<div class=\"detail\">"+
+	                                "<a href=\"#xxx\"><h4 class=\"pb-20\" name=\""+jsonnews[i].newsId+"\" id=\"enternewsdetail\">"+jsonnews[i].titile +"<br>"+
+	                                jsonnews[i].nickname+"</h4></a>"+
+	                                "<p>"+ jsonnews[i].content+"</p>"+
+	                                "<p class=\"footer pt-20\">"+
+	                                "<i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i>"+
+	                                "<a href=\"#\">"+jsonnews[i].like+" Likes</a>"+   
+	                                "<i class=\"ml-20 fa fa-comment-o\" aria-hidden=\"true\"></i>"+
+	                                "<a href=\"#\">"+jsonnews[i].comments+" Comments</a>"+
+	                                "</p>"+
+	                            "</div>"+
+	                        "</div>";    
+							$("#result").append($(str));
+           				 }
+		            },
+	            error:function(result){
+					alert("éè¯¯");
+				}
+	        })
+	       }
+	       else{
+	    	   alert("è¾å¥æç´¢åå®¹");
+	       }
+		});
+	</script>
+	<!--
+    	作者：HXB
+    	时间：2019-05-24
+    	描述：artTemplate模板
+    -->
+	<script type="text/html" id="module">
+		{{each list as value}}
+	    <div class="single-list flex-row d-flex" id="firstnewslist">
+	        <div class="thumb">
+	            <div class="date">
+	                <span>20</span><br>Dec
+	            </div>
+	            <img src="img/asset/l4.jpg" alt="">
+	        </div>
+	        <div class="detail">
+	            <a href="#"><h4 class="pb-20" name={{value.newsId}} id='enternewsdetail'>{{value.titile}} <br>
+	            value.nickname</h4></a>
+	            <p>
+	               {{value.content}}
+	            </p>
+	            <p class="footer pt-20">
+	            <i class="fa fa-heart-o" aria-hidden="true"></i>
+	            <a href="#">{{value.like}} Likes</a>  <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">{{value.comments}} Comments</a>
+	            </p>
+	        </div>
+	    </div>
+	    {{/each}}
+	</script>
+	

@@ -199,7 +199,6 @@ public class NewsDaoImpl implements NewsDao{
 
 	@Override
 	public ArrayList<News> searchNewsListByTitle(String newsType, int newsIndex) {
-		BaseDao aa = new BaseDao();
 		String strsql= "SELECT * FROM ±íÃû WHERE name LIKE '%?%'";
 		Object[] params = new Object[] {newsType};
 		ArrayList<News> newsList = getNewsList(strsql,params);

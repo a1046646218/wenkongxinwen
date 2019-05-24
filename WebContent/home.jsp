@@ -62,7 +62,7 @@
 				                    Ruojichong
 				                  </a>
 				                  <div class="dropdown-menu">
-				                    <a class="dropdown-item" href="single.html">个人中心</a>
+				                    <a class="dropdown-item" href="home.jsp">个人中心</a>
 				                    <a class="dropdown-item" href="closeSessionServlet">登出</a>
 				                  </div>
 				                </li>                              		
@@ -98,10 +98,10 @@
 							<span id="myusertype">${user.type}</span> <br>
 							<p>${user.introduction}</p>
 							<div class="social-link">
-								<a href="#"><button class="btn">
+								<a href="#"><button class="btn" id="toguanzhu">
 										<i class="fa fa-twitter" aria-hidden="true"></i>${user.followings}关注
 									</button></a> 
-								<a href="#"><button class="btn">
+								<a href="#"><button class="btn" id="tofensi">
 										<i class="fa fa-twitter" aria-hidden="true"></i>${user.followers}粉丝
 									</button></a>
 							</div>
@@ -114,6 +114,7 @@
 							<li><a href="#" id="showxin">动态</a></li>
 							<li><a href="#" id="showfavorite">收藏</a></li>
 							<li><a href="#" id="showcomment">消息</a></li>
+							<li><a href="#" id="showreview">参与</a></li>
 						</ul>
 						<div class="post-lists mt-0 pt-3" id="div1">
 						<div id="div2">
@@ -239,6 +240,7 @@
 	} else {
 		$('#myusertype').text("普通用户");
 		$('#showxin').hide();
+		$('#showcomment').hide();
 		$('#showxin').next().hide();
 	}
 	$.ajax({
@@ -359,6 +361,47 @@
 	$('#listcontent').empty();
 	});
 	
+	$('#showreview').click(function() {
+		$(this).parent().addClass("active");
+		$(this).parent().siblings().removeClass("active");
+		$("#div2").hide();
+		$('#listcontent').empty();
+		$.ajax({
+		    type : "post",
+			url : "forreviewListByUserIdServlet",
+			context : document.body,
+			dataType : "text",
+			async : false,
+			data : {"user_id" : userid,"num" : num},
+			success : function(result) {
+				alert(result);
+				var jsoncomment = JSON.parse(result);
+				for (var i = jsoncomment.length - 1; i >= 0; i--){
+					                       var str = "<div class=\"comment-list \" style=\" min-height:100px;height:auto!important;\" id=\"itissecond\" name=\""+jsoncomment[i].reviewId+"\">"+
+                                            //在这里哦
+                                            "<div class=\"single-comment justify-content-between d-flex\">"+
+                                                "<div class=\"user justify-content-between d-flex col-lg-12\">"+
+                                                    "<div class=\"thumb col-lg-2\">"+
+                                                        "<img src=\"img/asset/c2.jpg\">"+
+                                                    "</div>"+
+                                                    "<div class=\"desc col-lg-10\">"+
+                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment[i].userId+"\">"+jsoncomment[i].nickName+"</a></h5>"+
+                                                        "<p class=\"date\">"+jsoncomment[i].remarkstr+"</p>"+
+                                                        "<p class=\"comment\">"+
+                                                            jsoncomment[i].content+
+                                                        "</p>"+
+                                                    "</div>"+
+                                                "</div>"+
+                                             "</div>"+
+                                        "</div>";
+					$('#listcontent').append($(str));
+				
+			  	}
+			}
+		});
+	});
+	
+	
 	$('#showcomment').click(function() {
 		$(this).parent().addClass("active");
 		$(this).parent().siblings().removeClass("active");
@@ -372,16 +415,33 @@
 			async : false,
 			data : {"user_id" : userid,"num" : num},
 			success : function(result) {
-				var jsonnews = JSON.parse(result);
-				for (var i = jsonnews.length - 1; i >= 0; i--){
-					
+				alert(result);
+				var jsoncomment = JSON.parse(result);
+				for (var i = jsoncomment.length - 1; i >= 0; i--){
+					                         var str =  "<div class=\"single-comment justify-content-between d-flex\" style=\" min-height:100px;height:auto!important;\">"+
+                                                "<div class=\"user justify-content-between d-flex col-lg-12\"  >"+
+                                                    "<div class=\"thumb col-lg-2\">"+
+                                                        "<img src=\"img/asset/c2.jpg\" alt=\"\">"+
+                                                    "</div>"+
+                                                   " <div class=\"desc col-lg-10 pl-0\">"+
+                                                        "<h5><a href=\"#\" tohome=\""+jsoncomment[i].userId+"\">"+jsoncomment[i].nickName+"</a></h5>"+
+                                                        "<br>"+
+                                                        "<p class=\"comment\">"+
+                                                            jsoncomment[i].content+
+                                                        "</p>"+
+                                                    "</div>"+
+                                                "</div>"+
+                                            "</div>"+
+                                        "</div>";
 					$('#listcontent').append($(str));
 				
 			  	}
 			}
 		});
 	});
-
+	
+	
+	
 	$('#showinfo').click(function() {
 	$(this).parent().addClass("active");
 	$(this).parent().siblings().removeClass("active");
@@ -427,5 +487,16 @@
 			});		
 		}
 	});
+	
+	$('#toguanzhu').click(function(){
+		
+    	$(location).attr("href","g_F.jsp?"+"type=guanzhu"); 
+	
+	});
+	$('#tofensi').click(function(){
+		$(location).attr("href","g_F.jsp?"+"type=fans"); 
+	
+	});
+	
 </script>
 

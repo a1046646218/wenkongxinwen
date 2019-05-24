@@ -6,7 +6,7 @@ import neu.edu.entity.Comment;
 
 
 /**
- * 与Comment表相关的Dao接口
+ * 涓嶤omment琛ㄧ浉鍏崇殑Dao鎺ュ彛
  * @author mr.H
  *
  */
@@ -21,4 +21,6 @@ public interface CommentDao {
 	public ArrayList<Comment> getCommentListByUserId(int user_id);
 	
 	public int addNumOfReviewsToComment(int comment_id);
+	
+	public ArrayList<Comment> getCommentListByNewId(int newsId, int user_id);
 }
