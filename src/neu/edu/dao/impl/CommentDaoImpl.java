@@ -9,10 +9,8 @@ import neu.edu.dao.CommentDao;
 import neu.edu.dbutil.BaseDao;
 import neu.edu.entity.Comment;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 /**
  *  µœ÷¡ÀCommentDao
  * @author mr.H
@@ -33,11 +31,12 @@ public class CommentDaoImpl  implements CommentDao{
 			,co.getContent(),co.getLikes(),co.getReviews(),co.getNickName()};	
 		
 		ResultSet rs = null;
+		Connection conn = null;
+		PreparedStatement st = null;
 		int  increasenum = 0;
 		try {
-			Connection conn = aa.getCon();
+			conn = aa.getCon();
 			System.out.println(conn);
-			PreparedStatement st;
 			st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			if (null!=obj) {
 				for (int i = 0; i <obj.length; i++) {
@@ -51,7 +50,10 @@ public class CommentDaoImpl  implements CommentDao{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			aa.closeAll(conn, st, rs);
 		}
+		
 		return increasenum;
 
 	}

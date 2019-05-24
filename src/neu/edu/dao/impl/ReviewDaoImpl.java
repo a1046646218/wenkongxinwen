@@ -27,11 +27,12 @@ public class ReviewDaoImpl  implements ReviewDao {
 		Object[] params = new Object[] {review.getCommentId(),review.getUserId()
 				,review.getContent(),review.getRemarkstr(),review.getNickName()};
 		ResultSet rs = null;
+		Connection conn = null;
+		PreparedStatement st = null;
 		int  increasenum = 0;
 		try {
-			Connection conn = aa.getCon();
+			conn = aa.getCon();
 			System.out.println(conn);
-			PreparedStatement st;
 			st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			if (null!=params) {
 				for (int i = 0; i <params.length; i++) {
@@ -45,6 +46,8 @@ public class ReviewDaoImpl  implements ReviewDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			aa.closeAll(conn, st, rs);
 		}
 		return increasenum;
 	}

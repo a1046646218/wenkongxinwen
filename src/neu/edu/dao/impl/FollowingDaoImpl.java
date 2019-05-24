@@ -50,6 +50,8 @@ public class FollowingDaoImpl implements FollowingDao{
 			}		
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			aa.closeAll(aa.con, aa.pst, aa.rs);
 		}
 		return p;
 	}
