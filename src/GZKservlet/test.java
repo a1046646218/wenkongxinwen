@@ -28,7 +28,7 @@ public class test extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("type", "fans");
+		request.setAttribute("type", "guanzhu");
 		User user=new User(1, "zhang", "zhangsan", 1000, 100, "sb", 0, 0,"123","");
 		request.getSession().setAttribute("user",user);
 		//request.getRequestDispatcher("/WEB-INF/g_F.jsp").forward(request, response);

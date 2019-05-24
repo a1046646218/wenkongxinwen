@@ -3,7 +3,6 @@ package GZKservlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,16 +16,16 @@ import neu.edu.entity.User;
 import neu.edu.service.ForFollowingService;
 
 /**
- * Servlet implementation class UserListServlet
+ * Servlet implementation class GuanzhuServlet
  */
-@WebServlet("/userlist")
-public class UserListServlet extends HttpServlet {
+@WebServlet("/adduserlist")
+public class addUserListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserListServlet() {
+    public addUserListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,20 +43,32 @@ public class UserListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type=request.getParameter("type");
+		int num=Integer.parseInt(request.getParameter("num"));
 		User user=(User)request.getSession().getAttribute("user");
 		int id=user.getUserId();
 		ForFollowingService ff=new ForFollowingService();
 		if(type.equals("guanzhu"))
 		{
-			ArrayList<User> guanzhuliebiao = ff.getUserGuanByID(id);
+			ArrayList<User> liebiao = ff.getUserGuanByID(id);
+			ArrayList<User> guanzhuliebiao=new ArrayList<User>();
+			for(int i=num;i<=liebiao.size()-1&&i<=num+1;i++)
+			{
+			guanzhuliebiao.add(liebiao.get(i));
+			}
 			HashMap<String, Object> map = new HashMap<String,Object>();
-			map.put("guanzhuliebiao", guanzhuliebiao);			
+			map.put("guanzhuliebiao", guanzhuliebiao);
+			
 			String jsonStr = JSON.toJSONString(map);
 			response.getWriter().print(jsonStr);
 		}
 		else 
 		{
-			ArrayList<User> fansliebiao = ff.getUserFenByID(id);
+			ArrayList<User> liebiao = ff.getUserFenByID(id);
+			ArrayList<User> fansliebiao=new ArrayList<User>();
+			for(int i=num;i<=liebiao.size()-1&&i<=num+1;i++)
+			{
+			fansliebiao.add(liebiao.get(i));
+			}
 			HashMap<String, Object> map = new HashMap<String,Object>();
 			map.put("fansliebiao", fansliebiao);
 			
@@ -65,5 +76,5 @@ public class UserListServlet extends HttpServlet {
 			response.getWriter().print(jsonStr);	
 		}
 	}
-
 }
+

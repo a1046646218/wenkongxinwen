@@ -104,6 +104,10 @@
 						</ul>                 
                         <div class="post-lists" id="div1">                                                                  
                         </div>
+                        <div class="justify-content-center d-flex">
+								<a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"
+									 id="load">加载</a>
+						</div>
                                           
                     </div>
                 </div>
@@ -201,8 +205,8 @@ $(function(){
     	$("#guanzhu").parent('li').addClass("active");
     	$.ajax({
     		type:'post',
-    		url:'userlist',
-    		data:{type:type},
+    		url:'adduserlist',
+    		data:{type:type,num:0},
     		dataType:'json',
     		success:function(e){
     			console.log(JSON.stringify(e));
@@ -216,8 +220,8 @@ $(function(){
 		$("#fans").parent('li').addClass("active");
 		$.ajax({
 			type:'post',
-			url:'userlist',
-			data:{type:type},
+			url:'adduserlist',
+			data:{type:type,num:0},
 			dataType:'json',
 			success:function(e){
 				console.log(JSON.stringify(e));
@@ -235,8 +239,8 @@ $('body').on('click',"#guanzhu",function(){
 		$("#fans").parent('li').removeClass("active");
 	$.ajax({
 		type:'post',
-		url:'userlist',
-		data:{type:"guanzhu"},
+		url:'adduserlist',
+		data:{type:"guanzhu",num:0},
 		dataType:'json',
 		success:function(e){
 			console.log(JSON.stringify(e));
@@ -256,8 +260,8 @@ $('body').on('click',"#fans",function(){
 		$("#guanzhu").parent('li').removeClass("active");
 		$.ajax({
 			type:'post',
-			url:'userlist',
-			data:{type:"fans"},
+			url:'adduserlist',
+			data:{type:"fans",num:0},
 			dataType:'json',
 			success:function(e){
 				console.log(JSON.stringify(e));
@@ -303,7 +307,38 @@ $('body').on('click','[name=otherId]',function(){
 	var otherId = $(this).attr("value");
 	$(location).attr("href","clickHeadToHomeServlet?"+"otheruserId="+otherId);
 	});
-	
+$('body').on('click','#load',function(){
+	var num=$("#div1").find(".single-list").length;
+	var type=$("#table").attr("value");
+	if(type=="fans")
+	{
+	$.ajax({
+		type:'post',
+		url:'adduserlist',
+		data:{type:"fans",num:num},
+		dataType:'json',
+		success:function(e){
+			console.log(JSON.stringify(e));
+			var new_html= template("test4",e);
+			$('#div1').append(new_html);
+		}
+	});
+	}
+	if(type=="guanzhu")
+	{	
+	$.ajax({
+		type:'post',
+		url:'adduserlist',
+		data:{type:"guanzhu",num:num},
+		dataType:'json',
+		success:function(e){
+			console.log(JSON.stringify(e));
+			var new_html= template("test3",e);
+			$('#div1').append(new_html);
+		}
+	});
+	}
+    });
 });
 </script>
 <script type="text/html" id="test1">
@@ -343,12 +378,58 @@ $('body').on('click','[name=otherId]',function(){
     {{value.introduction}}
     </p>
     <div class="about_widget">
-<a href="#" ><button class="btn" name="guanzhu" value="{{value.userId}}">取消关注</button></a>
+    <a href="#" ><button class="btn" name="guanzhu" value="{{value.userId}}">取消关注</button></a>
     </div>    
-<div class="social-link">
+    <div class="social-link">
     </div> 
     
  
+    </p>
+    </div>
+    </div>
+    {{/each}}
+</script>
+<script type="text/html" id="test3">
+    {{each guanzhuliebiao as value index}}
+    <div class="single-list flex-row d-flex">
+    <div class="thumb">
+    <div class="date">
+    <span>20</span><br>Dec
+    </div>
+    <img src="img/asset/l1.jpg" alt="">
+    </div>
+    <div class="detail">
+    <a href="#"><h4 class="pb-20" name="otherId" value="{{value.userId}}">{{value.nickName}} <br>
+    </h4></a>
+    <p>
+    {{value.introduction}}
+    </p>
+    <div class="about_widget">
+    <a href="#" ><button class="btn" name="guanzhu" value="{{value.userId}}">取消关注</button></a>
+    </div>    
+    <div class="social-link">
+    </div> 
+    
+ 
+    </p>
+    </div>
+    </div>
+    {{/each}}
+</script>
+<script type="text/html" id="test4">
+    {{each fansliebiao as value index}}
+    <div class="single-list flex-row d-flex">
+    <div class="thumb">
+    <div class="date">
+    <span>20</span><br>Dec
+    </div>
+    <img src="img/asset/l1.jpg" alt="">
+    </div>
+    <div class="detail">
+    <a href="#"><h4 class="pb-20" name="otherId" value="{{value.userId}}">{{value.nickName}} <br>
+    </h4></a>
+    <p>
+    {{value.introduction}}
     </p>
     </div>
     </div>
