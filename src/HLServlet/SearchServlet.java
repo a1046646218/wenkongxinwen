@@ -42,7 +42,14 @@ public class SearchServlet extends HttpServlet {
 			ForNewsListService sservice=new ForNewsListService();
 			
 			ArrayList<News> newsList = sservice.getNewsList(newsinfo, newsIndex);
-			String jsonNewsList = JSON.toJSONString(newsList);
+			ArrayList<News> newsList2 = new ArrayList<News>();
+			for(int i=0;i<newsList.size();i++) {
+				newsList2.add(newsList.get(i));
+				if(i==1) {
+					break;
+				}
+			}
+			String jsonNewsList = JSON.toJSONString(newsList2);
 			System.out.println(jsonNewsList);
 			response.getWriter().print(jsonNewsList);
 			
