@@ -139,9 +139,9 @@
 								</div>
 							</div></div>
 							<div id="listcontent"></div>
-							<div class="justify-content-center d-flex">
+							<div id="loadmore"  class="justify-content-center d-flex">
 								<a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"
-									href="#"> Load More Post</a>
+									>加载更多</a>
 							</div>
 						</div>
 
@@ -243,28 +243,11 @@
 		$('#showcomment').hide();
 		$('#showxin').next().hide();
 	}
-	$.ajax({
-		type:"get",
-		url:"checkUserFollowing",
-		context:document.body,
-		dataType:"text",
-		data:"userid="+userid,
-		success: function(result){
-			if(result=="0"){
-				var $a=$('[name=guanzhu]').html("关注");
-			}
-			if(result=="1"){
-				var $a=$('[name=guanzhu]').html("取消关注");
-			}
-			
-		}
-	});
-	$('body').on("click","#showxin",function() {
-			$(this).parent().addClass("active");
-			$(this).parent().siblings().removeClass("active");
-			$("#div2").hide();
-			$('#listcontent').empty();
-			$.ajax({
+	
+	
+	
+	function showxinf(num){
+				$.ajax({
 					type : "post",
 					url : "fornewsListByUserIDServlet",
 					context : document.body,
@@ -304,15 +287,11 @@
 							$('#listcontent').append($(str));
 										}
 									}
-								});
-
 					});
-	$('#showfavorite').click(function() {
-		$(this).parent().addClass("active");
-		$(this).parent().siblings().removeClass("active");
-		$("#div2").hide();
-		$('#listcontent').empty();
-		$.ajax({
+	}
+	
+	function showfavoritef(num){
+			$.ajax({
 		      type : "post",
 			  url : "forfavoriteListByUserIDServlet",
 			  context : document.body,
@@ -352,21 +331,10 @@
 										}
 									}
 								});
-					});
-
-	$('#showinfo').click(function() {
-	$(this).parent().addClass("active");
-	$(this).parent().siblings().removeClass("active");
-	$('#div2').show();	
-	$('#listcontent').empty();
-	});
+	}
 	
-	$('#showreview').click(function() {
-		$(this).parent().addClass("active");
-		$(this).parent().siblings().removeClass("active");
-		$("#div2").hide();
-		$('#listcontent').empty();
-		$.ajax({
+	function showreview(num){
+			$.ajax({
 		    type : "post",
 			url : "forreviewListByUserIdServlet",
 			context : document.body,
@@ -399,21 +367,17 @@
 			  	}
 			}
 		});
-	});
+	}
 	
 	
-	$('#showcomment').click(function() {
-		$(this).parent().addClass("active");
-		$(this).parent().siblings().removeClass("active");
-		$("#div2").hide();
-		$('#listcontent').empty();
+	function showcomment(num){
 		$.ajax({
 		    type : "post",
 			url : "forCommentListByUserIdServlet",
 			context : document.body,
 			dataType : "text",
 			async : false,
-			data : {"user_id" : userid,"num" : num},
+			data : {"user_id" : userid,"num" :num},
 			success : function(result) {
 				alert(result);
 				var jsoncomment = JSON.parse(result);
@@ -438,9 +402,47 @@
 			  	}
 			}
 		});
+	}
+	
+	$('body').on("click","#showxin",function() {
+			$(this).parent().addClass("active");
+			$(this).parent().siblings().removeClass("active");
+			$("#div2").hide();
+			$('#listcontent').empty();
+			showxinf(0);
+
+	});
+	$('#showfavorite').click(function() {
+			$(this).parent().addClass("active");
+			$(this).parent().siblings().removeClass("active");
+			$("#div2").hide();
+			$('#listcontent').empty();
+			showfavoritef(0);
+	});
+
+	$('#showinfo').click(function() {
+	$(this).parent().addClass("active");
+	$(this).parent().siblings().removeClass("active");
+	$('#div2').show();	
+	$('#listcontent').empty();
+	});
+	
+	$('#showreview').click(function() {
+		$(this).parent().addClass("active");
+		$(this).parent().siblings().removeClass("active");
+		$("#div2").hide();
+		$('#listcontent').empty();
+		showreview(0);
 	});
 	
 	
+	$('#showcomment').click(function() {
+		$(this).parent().addClass("active");
+		$(this).parent().siblings().removeClass("active");
+		$("#div2").hide();
+		$('#listcontent').empty();
+		showcomment(0);
+	});
 	
 	$('#showinfo').click(function() {
 	$(this).parent().addClass("active");
@@ -457,37 +459,6 @@
     	
     });
 	
-	
-	
-	$('body').on('click','[name=guanzhu]',function(){
-		var guanId = $(this).val();
-		var relation = $(this).html();
-		var $a=$(this);
-		if(relation=="取消关注"){
-			$.ajax({
-				type:'post',
-				url:'quguan',
-				data:{guanId:guanId},
-				dataType:'text',
-				success:function(){
-					$a.html("关注");				
-				}
-			});
-			//return false;//  js方法如果想终止, 写return  false;
-		}
-		else{
-			$.ajax({
-				type:'post',
-				url:'guanzhu',
-				data:{guanId:guanId},
-				dataType:'text',
-				success:function(){			
-					$a.html("取消关注");
-				}
-			});		
-		}
-	});
-	
 	$('#toguanzhu').click(function(){
 		
     	$(location).attr("href","connecttofensiServlet?"+"type=guanzhu"); 
@@ -496,6 +467,24 @@
 	$('#tofensi').click(function(){
 		$(location).attr("href","connecttofensiServlet?"+"type=fans"); 
 	
+	});
+	
+	
+	$('#loadmore').click(function(){
+		var text = $('.active').text();
+		//alert(text);
+		var num = $('#listcontent').children().length;
+		//alert(num);
+		if(text=="消息"){
+			alert("chengg");
+			showcomment(num);
+		}else if(text=="参与"){
+			showreview(num);
+		}else if(text=="动态"){
+			showxinf(num);
+		}else if(text=="收藏"){
+			showfavoritef(num);
+		}
 	});
 	
 </script>

@@ -140,9 +140,9 @@
 								</div>
 							</div></div>
 							<div id="listcontent"></div>
-							<div class="justify-content-center d-flex">
+							<div id="loadmore" class="justify-content-center d-flex">
 								<a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"
-									href="#"> Load More Post</a>
+									>加载更多</a>
 							</div>
 						</div>
 
@@ -259,12 +259,8 @@
 			
 		}
 	});
-	$('body').on("click","#showxin",function() {
-			$(this).parent().addClass("active");
-			$(this).parent().siblings().removeClass("active");
-			$("#div2").hide();
-			$('#listcontent').empty();
-			$.ajax({
+	function showxinya(num){
+		$.ajax({
 					type : "post",
 					url : "fornewsListByUserIDServlet",
 					context : document.body,
@@ -304,14 +300,9 @@
 							$('#listcontent').append($(str));
 										}
 									}
-								});
-
-					});
-	$('#showfavorite').click(function() {
-		$(this).parent().addClass("active");
-		$(this).parent().siblings().removeClass("active");
-		$("#div2").hide();
-		$('#listcontent').empty();
+			});
+	}
+	function favoriteya(num){
 		$.ajax({
 		      type : "post",
 			  url : "forfavoriteListByUserIDServlet",
@@ -352,7 +343,21 @@
 										}
 									}
 								});
-					});
+	}
+	$('body').on("click","#showxin",function() {
+			$(this).parent().addClass("active");
+			$(this).parent().siblings().removeClass("active");
+			$("#div2").hide();
+			$('#listcontent').empty();
+			showxinya(0);
+	});
+	$('#showfavorite').click(function() {
+		$(this).parent().addClass("active");
+		$(this).parent().siblings().removeClass("active");
+		$("#div2").hide();
+		$('#listcontent').empty();
+		favoriteya(0);
+	});
 
 	$('#showinfo').click(function() {
 	$(this).parent().addClass("active");
@@ -361,9 +366,6 @@
 	$('#listcontent').empty();
 	});
 	
-	
-	
-	
 	$('body').on('click','#enternewsdetail',function(){
     		var searchnew_id = $(this).attr("name");
     		alert(searchnew_id);
@@ -371,7 +373,17 @@
     	
     });
 	
-	
+	$('#loadmore').click(function(){
+		var text = $('.active').text();
+		//alert(text);
+		var num = $('#listcontent').children().length;
+		//alert(num);
+		if(text=="动态"){
+			showxinya(num);
+		}else if(text=="收藏"){
+			favoriteya(num);
+		}
+	});
 	
 	$('body').on('click','[name=guanzhu]',function(){
 		var guanId = $(this).val();

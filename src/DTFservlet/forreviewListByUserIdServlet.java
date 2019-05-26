@@ -22,7 +22,15 @@ public class forreviewListByUserIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SelectReviewService sel = new SelectReviewService();
 		User user  = (User)request.getSession().getAttribute("user");
-		ArrayList<Review> list = sel.selectReview(user.getUserId());
+		ArrayList<Review> alllist = sel.selectReview(user.getUserId());
+		
+		ArrayList<Review> list = new ArrayList<>();
+		int num = Integer.parseInt(request.getParameter("num"));
+		for(int i=num;i<alllist.size()&&i<num+3;i++) {
+			list.add(alllist.get(i));
+		}
+		
+		
 		String jsonString = JSON.toJSONString(list);
 		System.out.println(jsonString);
 		response.getWriter().println(jsonString);
