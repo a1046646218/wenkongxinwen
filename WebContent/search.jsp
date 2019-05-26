@@ -44,19 +44,19 @@
                       </button>
 
                       <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
-                        <ul class="navbar-nav scrollable-menu">
+                         <ul class="navbar-nav scrollable-menu">
                             <li><a href="main.jsp">首页</a></li>
                             <c:if test="${(!empty user)&&(user.type==1)}">
-                            	<li><a href="#news">发布新闻</a></li>
+                            	<li><a href="upload.jsp">发布新闻</a></li>
                             </c:if>
                         	<c:if test="${!empty user}">
 				           <!-- Dropdown -->
 				                <li class="dropdown">
 				                  <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				                    Ruojichong
+				                    ${user.nickName}
 				                  </a>
 				                  <div class="dropdown-menu">
-				                    <a class="dropdown-item" href="single.html">个人中心</a>
+				                    <a class="dropdown-item" href="home.jsp">个人中心</a>
 				                    <a class="dropdown-item" href="closeSessionServlet">登出</a>
 				                  </div>
 				                </li>                              		
@@ -104,7 +104,7 @@
 
                                                     
                             <div class="justify-content-center d-flex" >
-                                <a id="addNews" class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"> Load More Post</a>
+                                <a id="addNews" class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"> 加载更多</a>
                             </div>                                                                     
                         </div>                          
                     </div>
@@ -181,8 +181,8 @@
         $.ajax({
             type: 'post', 
             url: "searchservlet",
-            data:{"newsinfo": searchtxt,"newsIndex":$("div[uid]").length}, 
-            dataType:'test', 
+            data:{"newsinfo": searchtxt,"newsIndex":0}, 
+            dataType:'text', 
             success: function(result){ 	
             	 			$("#result").empty();
 							var jsonnews = JSON.parse(result);
@@ -210,7 +210,7 @@
             				}
             },
             error:function(result){
-				alert("éè¯¯");
+				alert("错误");
 			}
         });
       });	
@@ -253,12 +253,12 @@
             }
             },
             error:function(result){
-				alert("éè¯¯");
+				alert("错误");
 			}
         })
        }
        else{
-    	   alert("è¾å¥æç´¢åå®¹");
+    	   alert("空");
        }
     });
     $('body').on('click','#enternewsdetail',function(){
@@ -275,13 +275,15 @@
     -->
 	<script>
 		$("#addNews").click(function(){
-		
+		alert("ds");
 	        var info = $('#searchtxt').text();
+	        var listnum = $('[id=firstnewslist]').length;
+	        alert(listnum);
 	       if(info.length>0){
 	        $.ajax({
 	            type: 'post', 
 	            url: "searchservlet",
-	            data:{"newsinfo": info,"newsIndex":$("#firstnewslist").length}, 
+	            data:{"newsinfo": info,"newsIndex":listnum}, 
 	             dataType:'text', 
 	            success: function(result){ 	
 						var jsonnews = JSON.parse(result);
@@ -309,12 +311,12 @@
            				 }
 		            },
 	            error:function(result){
-					alert("éè¯¯");
+					alert("错误");
 				}
 	        })
 	       }
 	       else{
-	    	   alert("è¾å¥æç´¢åå®¹");
+	    	   alert("空");
 	       }
 		});
 	</script>

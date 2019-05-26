@@ -46,13 +46,13 @@
                         <ul class="navbar-nav scrollable-menu">
                             <li><a href="main.jsp">首页</a></li>
                             <c:if test="${(!empty user)&&(user.type==1)}">
-                            	<li><a href="#news">发布新闻</a></li>
+                            	<li><a href="upload.jsp">发布新闻</a></li>
                             </c:if>
                         	<c:if test="${!empty user}">
 				           <!-- Dropdown -->
 				                <li class="dropdown">
 				                  <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				                    Ruojichong
+				                    ${user.nickName}
 				                  </a>
 				                  <div class="dropdown-menu">
 				                    <a class="dropdown-item" href="home.jsp">个人中心</a>

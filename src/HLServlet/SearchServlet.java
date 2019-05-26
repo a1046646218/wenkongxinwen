@@ -39,15 +39,13 @@ public class SearchServlet extends HttpServlet {
 			String newsinfo = request.getParameter("newsinfo");
 			System.out.println("newsinfo:"+newsinfo);
 			int newsIndex  = Integer.parseInt(request.getParameter("newsIndex"));
+			System.out.println(newsIndex);
 			ForNewsListService sservice=new ForNewsListService();
 			
 			ArrayList<News> newsList = sservice.getNewsListByTitle(newsinfo, newsIndex);
 			ArrayList<News> newsList2 = new ArrayList<News>();
-			for(int i=0;i<newsList.size();i++) {
+			for(int i=newsIndex;i<newsList.size()&&i<newsIndex+2;i++) {
 				newsList2.add(newsList.get(i));
-				if(i==1) {
-					break;
-				}
 			}
 			String jsonNewsList = JSON.toJSONString(newsList2);
 			System.out.println(jsonNewsList);
