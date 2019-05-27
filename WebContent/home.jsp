@@ -127,8 +127,13 @@
 							<div class="name-wrapper mt-10 pt-5 " >
 								<span >用户名:</span>
 								<span style="color: #777;font-size: 18px;font-weight: 400;line-height: 1.625em;">${user.nickName}</span> 
-								<span class="glyphicon glyphicon-pencil" >编辑</span>
+								<span id="editname" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal">编辑</span>
 							</div>
+							
+							
+							
+							
+							<!-- /input-group -->
 							<div class="name-wrapper mt-10 pt-5 " >
 								<span >用户类型：</span>
 								<span style="color: #777;font-size: 18px;font-weight: 400;line-height: 1.625em;" id="myusertypehl">${user.type}</span>
@@ -137,7 +142,7 @@
 						    <div class="introduce-wrapper mt-10 pt-5 ">
 						    	<span >个人介绍:</span>
 								<span style="color: #777;font-size: 18px;font-weight: 400;line-height: 1.625em;">${user.introduction}</span> 
-								<span class="glyphicon glyphicon-plus" >添加一句话介绍自己</span>				
+								<span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#yourModal">添加一句话介绍自己</span>				
 								</div>
 						</div></div></div>
 							<div id="listcontent"></div>
@@ -154,7 +159,51 @@
 		<!-- End post Area -->
 	</div>
 	<!-- End post Area -->
-
+	<div class="modal fade" id="yourModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" style="height: 50px;">
+							
+					</div>
+							
+							<div class="modal-body">
+								<div class="input-group">
+									<input type="text" id="submitintroduce" class="form-control">
+									
+								</div>
+								
+                            </div>
+						<div class="modal-footer">
+								<button type="button" id="submitintroducesss" class="btn btn-success" data-dismiss="modal">提交</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+	</div>
+	
+	
+	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" style="height: 50px;">
+							
+					</div>
+							
+							<div class="modal-body">
+								<div class="input-group">
+									<input type="text" id="submitusernamegai" class="form-control">
+									
+								</div>
+								
+                            </div>
+						<div class="modal-footer">
+								<button type="button" id="submitusername" class="btn btn-success" data-dismiss="modal">提交</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+	</div>
 	<!-- start footer Area -->
 	<footer class="footer-area section-gap">
 		<div class="container">
@@ -500,5 +549,56 @@
 		}
 	});
 	
+	
+	
+	$('#submitusername').click(function(){
+		alert('hha');
+		var str = $('#submitusernamegai').val();
+		$.ajax({
+			context : document.body,
+			dataType : "text",
+			async : false,
+			data : {"str" :str},
+			url :"changenickname",
+			success :function(result){
+				if(result==1){
+					alert("修改成功");
+					location.reload();
+				}
+				else{
+					alert("修改失败");
+				}
+				
+			}
+		});
+		
+		
+	});
+	
+	
+	$('#submitintroducesss').click(function(){
+		alert('hha');
+		var str = $('#submitintroduce').val();
+		$.ajax({
+			context : document.body,
+			dataType : "text",
+			async : false,
+			data : {"str" :str},
+			url :"changeintroduce",
+			success :function(result){
+				if(result==1){
+					alert("修改成功");
+					location.reload();
+				}
+				else{
+					alert("修改失败");
+				}
+				
+			}
+		});
+		
+		
+		
+	});
 </script>
 

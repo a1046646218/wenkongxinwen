@@ -130,7 +130,18 @@ public class UserDaoImpl implements UserDao {
 		return a;
 	}
 
-
+	public int updateuserintroduce(int userId,String nickname) {
+		BaseDao aa = new BaseDao();
+		Object[] params =new Object[]{nickname,userId};
+		int a = aa.executeIUD("update user set introduction=? where userId=?",params);
+		return a;
+	}
+	public int updateuserNickename(int userId,String introduce) {
+		BaseDao aa = new BaseDao();
+		Object[] params =new Object[]{introduce,userId};
+		int a = aa.executeIUD("update user set nickName=? where userId=?",params);
+		return a;
+	}
 	/**
 	 * 增加用户的关注数
 	 * 根据userId从user表中找到匹配的行，对匹配行的followings+1
