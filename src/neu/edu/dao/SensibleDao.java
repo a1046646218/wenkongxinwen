@@ -13,4 +13,6 @@ public interface SensibleDao {
 	public int deleteSence(int senceId);
 	
 	public ArrayList<Sence> findSenceByUserId(int userId);
+	
+	public ArrayList<Sence> findeSenceBySenceId(int senceId);
 }

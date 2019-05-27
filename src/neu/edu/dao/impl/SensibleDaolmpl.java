@@ -77,6 +77,13 @@ public class SensibleDaolmpl implements SensibleDao{
 		
 		return list;
 	}
+
+	@Override
+	public ArrayList<Sence> findeSenceBySenceId(int senceId) {
+		String sql = "select * from sensible where senceid = ?";
+		ArrayList<Sence> list = selectSence(sql,senceId);
+		return list;
+	}
 	
 
 }
