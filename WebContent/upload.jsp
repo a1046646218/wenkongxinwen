@@ -110,12 +110,12 @@
 	  		    <!-- 输入部分 -->
 	  		     <div class="input-group-icon mt-25">	
 	  		 	 <span class="glyphicon glyphicon-list-alt mb-20" style="font-size:20px;font-weight:bold;color:#5bc0de"> 新闻标题</span>
-			     <input  class="form-control" style="background-color:#f9f9ff;border-left: 5px solid #c43afe;" type="text" name="first_name" 
+			     <input  class="form-control" style="background-color:#f9f9ff;border-left: 5px solid #c43afe;" type="text" name="title" 
 			     placeholder="取个吸引眼球的标题吧......" onfocus="this.placeholder = ''" onblur="this.placeholder = '取个引人注目的标题吧......'" required="" >
 		        </div>	
 	  			<div class=" input-group-icon mt-30">
 	  		     <span class="glyphicon glyphicon-list mb-20" style="font-size:20px;font-weight:bold;color:#5bc0de"> 新闻内容</span>
-				<textarea class="form-control" style="background-color:#f9f9ff;border-left: 5px solid #c43afe;" rows="20" 
+				<textarea class="form-control" style="background-color:#f9f9ff;border-left: 5px solid #c43afe;" rows="20"  name="content"
 				placeholder="快点写下你想要分享的新闻吧！！！" onfocus="this.placeholder = ''" onblur="this.placeholder = '快点写下你想要分享的新闻吧！！！'" required=""></textarea>
 				</div>
 				<!--新闻类型  -->			
