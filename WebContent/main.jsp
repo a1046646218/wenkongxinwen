@@ -105,72 +105,48 @@
                     </div>
                     
                     <div class="single_widget cat_widget">
-                        <h4 class="text-uppercase pb-20">post categories</h4>
+                        <h4 class="text-uppercase pb-20">标签</h4>
                         <ul>
                             <li id="changeNews" name="娱乐">
-                                <a href="#">娱乐 <span>37</span></a>
+                                <a href="#">娱乐 <span></span></a>
                             </li>
                             <li id="changeNews" name="直播">
-                                <a href="#">直播 <span>37</span></a>
+                                <a href="#">直播 <span></span></a>
                             </li>
                             <li id="changeNews">
-                                <a href="#">Fashion <span>37</span></a>
+                                <a href="#">Fashion <span></span></a>
                             </li>
                             <li id="changeNews">
-                                <a href="#">Art <span>37</span></a>
+                                <a href="#">Art <span></span></a>
                             </li>
                             <li id="changeNews">
-                                <a href="#">Food <span>37</span></a>
+                                <a href="#">Food <span></span></a>
                             </li>
                             <li id="changeNews">
-                                <a href="#">Architecture <span>37</span></a>
+                                <a href="#">Architecture <span></span></a>
                             </li>
                             <li id="changeNews">
-                                <a href="#">Adventure <span>37</span></a>
+                                <a href="#">Adventure <span></span></a>
                             </li>                                
                         </ul>
                     </div>
                      
                     <div class="single_widget cat_widget">
-                        <h4 class="text-uppercase pb-20">post archive</h4>
-                        <ul>
-                            <li>
-                                <a href="#">Dec'17 <span>37</span></a>
+                        <h4 class="text-uppercase pb-20">热门</h4>
+                        <ul id="hotnewslist">
+                            <!--<li>
+                                <a href="#">Dec'17 <span></span></a>
                             </li>
                             <li>
-                                <a href="#">Nov'17 <span>37</span></a>
+                                <a href="#">Nov'17 <span></span></a>
                             </li>
                             <li>
-                                <a href="#">Oct'17 <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Sept'17 <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Aug'17 <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Jul'17 <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Jun'17 <span>37</span></a>
-                            </li>                                
+                                <a href="#">Oct'17 <span></span></a>
+                            </li>-->
+                                               
                         </ul>
                     </div> 
-                    <div class="single_widget tag_widget">
-                        <h4 class="text-uppercase pb-20">Tag Clouds</h4>
-                        <ul>
-                            <li><a href="#">Lifestyle</a></li>
-                            <li><a href="#">Art</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Technology</a></li>
-                            <li><a href="#">Fashion</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Technology</a></li>
-                        </ul>
-                    </div>                                                 
+                                                                    
                 </div>
             </div>
         </div>    
@@ -287,6 +263,7 @@
 
         <script>
         	var currentNewsType = "娱乐";
+        	
         	$(document).ready(function(){
         		var contentNumber = $("div[name='content']").length;
         		$.ajax({
@@ -303,7 +280,26 @@
         				$("#addNews").before(newContentNews);
         			} 
         		});
+        		$.ajax({
+        			type:"post",
+        			url:"getHotloginNewsServlet",
+        			async:true,
+        			dataType:"text",
+        			success:function(results){
+        				alert(results);
+        				var jsoncomment = JSON.parse(results);
+        				for(var i=0;i<jsoncomment.length;i++){
+        					
+        					var str = "<li id=\"enternewsdetail\" name=\""+jsoncomment[i].newsId+"\"><a>"+jsoncomment[i].titile+"<span></span></a></li>";
+        					
+        				
+        					$('#hotnewslist').append($(str));
+        				};
+        			} 
         	});
+        		
+        	});
+        	
         	$('#TFsearchbutton').click(function(){
         			var txt = $('#TFsearchtxt').val();
         			if(txt==""||txt=="Search"){
