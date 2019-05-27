@@ -73,6 +73,8 @@ public class SensibleDaolmpl implements SensibleDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			aa.closeAll(aa.con, aa.pst, aa.rs);
 		}
 		
 		return list;
