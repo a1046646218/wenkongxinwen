@@ -149,18 +149,6 @@
                  border: 1px solid #4cd3e3;border-radius:25px;background-image: -webkit-linear-gradient(45deg, #62bdfc 0%, #8490ff 100%);" value="上传" />
                  </div>
 				</form></div>
-				
-				<!--  初始-->
-				 <form action="PublicNewsServlet" method="post" enctype="multipart/form-data" >
-				标题:<input type="text" value=""  name="title"/><br />
-	  			内容:<textarea class="form-control" id="textarea" name="content" rows="10" ></textarea><br />
-	  			新闻类型: 娱乐<input type="radio" name="type" value="娱乐"/>
-	  					 直播<input type="radio" name="type" value="直播" />
-	  					<!--  </div> -->
-	  			<br />
-				图片<input type="file" name="file"/><br />
-	  			<input type="submit" value="上传" />  			
-	  		</form>		
 	  	</div>          
   		<img alt="" src="${filename }">
   		</div></div>
@@ -181,42 +169,5 @@
         <script src="js/jquery.sticky.js"></script>
         <script src="js/main.js"></script>  
         <script src="js/template.js"></script>
-        <script type="text/javascript" >
-	        var textarea = document.getElementById('textarea');
-	        function makeExpandingArea(el){
-	            var setStyle = function(el){
-	                el.style.height = 'auto';
-	                el.style.height = el.scrollHeight + 'px';
-	                // console.log(el.scrollHeight);
-	            }
-	            var delayedResize = function(el) {
-	                window.setTimeout(function(){
-	                    setStyle(el);
-	                }, 0);
-	            }
-	            if(el.addEventListener){
-	                el.addEventListener('input',function(){
-	                    setStyle(el)
-	                },false);
-	                setStyle(el)
-	            }else if(el.attachEvent){
-	                el.attachEvent('onpropertychange',function(){
-	                    setStyle(el)
-	                })
-	                setStyle(el)
-	            }
-	            if(window.VBArray && window.addEventListener) { //IE9
-	                 el.attachEvent("onkeydown", function() {
-	                var key = window.event.keyCode;
-	                if(key == 8 || key == 46) delayedResize(el);
-	             
-	              });
-	              el.attachEvent("oncut", function(){
-	                delayedResize(el);
-	              });//处理粘贴
-	            }
-	        }
-	        makeExpandingArea(textarea);
-   		 </script>
     </body>
 </html>

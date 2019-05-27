@@ -1,6 +1,6 @@
 package HXBservlet;
 
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,17 +24,10 @@ import neu.edu.service.ForNewsListService;
 @MultipartConfig
 public class PublicNewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	String bathcopyPath = "C:/Users/N&B/Desktop/neunews/wenkongxinwen/WebContent/upload/";
+
+	String bathcopyPath = "C:/Users/mr.H/git/wenkongxinwen/WebContent/upload/";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		ForNewsListService forNewsListService = new ForNewsListService();
-//		String url = forNewsListService.getNewsByID(889).getUrl();
-//		request.getSession().setAttribute("filename", "img/upload/"+url);
-//		System.out.println("img/upload/"+url);
-//		response.sendRedirect("upload.jsp");
-		File fileFolder = new File("bbba111");
-		if (!fileFolder.exists()) {
-			fileFolder.mkdirs();
-		}    
+		
 	}
 
 	/**
@@ -74,7 +67,7 @@ public class PublicNewsServlet extends HttpServlet {
 		//3. 上传
 		part.write(fileFinalPath);
 		String copyPath = bathcopyPath+newFileName;
-		copyFile3(fileFinalPath,copyPath);
+		copyFile(fileFinalPath,copyPath);
 
 		
 		AddNewsService addNewsService = new AddNewsService();
@@ -93,7 +86,7 @@ public class PublicNewsServlet extends HttpServlet {
 	 * @param destPath 目标文件位置,
 	 * @throws IOException
 	 */
-    private  void copyFile3(String srcPath, String destPath) throws IOException {
+    private  void copyFile(String srcPath, String destPath) throws IOException {
         
         // 打开输入流
         FileInputStream fis = new FileInputStream(srcPath);
