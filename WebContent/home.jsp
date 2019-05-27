@@ -118,29 +118,31 @@
 						</ul>
 						<div class="post-lists mt-0 pt-3" id="div1">
 						<div id="div2">
-							<div class="single-list flex-row d-flex">
-								<div class="thumb">
-									<div class="date">
-										<span>20</span><br>Dec
-									</div>
-									<img src="img/asset/l4.jpg" alt="">
+						<div id="personinfo" style="padding: 48px 48px 96px;background:#f9f9ff;height:400px;">
+						<div style="height:45px;border-radius:25px;background-image: -webkit-linear-gradient(45deg, #62bdfc 0%, #8490ff 100%);">
+                        <div style="padding-top:10px;padding-left:20px;font-size:24px;font-weight:bold;color:white">
+                        <span class="glyphicon glyphicon-user">个人信息</span></div>             
+                        </div>
+						<div class="detail"style="font-size:20px;font-weight:bold;color:#5bc0de">
+							<div class="name-wrapper mt-10 pt-5 " >
+								<span >用户名:</span>
+								<span style="color: #777;font-size: 18px;font-weight: 400;line-height: 1.625em;">${user.nickName}</span> 
+								<span class="glyphicon glyphicon-pencil" >编辑</span>
+							</div>
+							<div class="name-wrapper mt-10 pt-5 " >
+								<span >用户类型：</span>
+								<span style="color: #777;font-size: 18px;font-weight: 400;line-height: 1.625em;" id="myusertypehl">${user.type}</span>
+								<!--<span class="glyphicon glyphicon-pencil" style="color: #007BFF;">编辑</span>-->
+							</div>
+						    <div class="introduce-wrapper mt-10 pt-5 ">
+						    	<span >个人介绍:</span>
+								<span style="color: #777;font-size: 18px;font-weight: 400;line-height: 1.625em;">${user.introduction}</span> 
+								<span class="glyphicon glyphicon-plus" >添加一句话介绍自己</span>				
 								</div>
-								<div class="detail">
-									<a href="#"><h4 class="pb-20" id="nickname">${user.nickName}
-											<br> ${user.type}
-										</h4></a>
-									<p>${user.introduction}</p>
-									<p class="footer pt-20">
-										<i class="fa fa-heart-o" aria-hidden="true"></i>
-                                         <a href="#">${user.followings} Likes</a> 
-                                        <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i>
-										<a href="#">${user.followers} Comments</a>
-									</p>
-								</div>
-							</div></div>
+						</div></div></div>
 							<div id="listcontent"></div>
 							<div id="loadmore"  class="justify-content-center d-flex">
-								<a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"
+								<a id="hl" class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"
 									>加载更多</a>
 							</div>
 						</div>
@@ -237,8 +239,10 @@
 	//alert(num);
 	if (usertype == "1") {
 		$('#myusertype').text("官方验证");
+		$('#myusertypehl').text("官方验证");
 	} else {
 		$('#myusertype').text("普通用户");
+		$('#myusertypehl').text("普通用户");
 		$('#showxin').hide();
 		$('#showcomment').hide();
 		$('#showxin').next().hide();
@@ -403,11 +407,15 @@
 			}
 		});
 	}
+	$(document).ready(function(){
+		$("#hl").hide();
+	});
 	
 	$('body').on("click","#showxin",function() {
 			$(this).parent().addClass("active");
 			$(this).parent().siblings().removeClass("active");
 			$("#div2").hide();
+			$("#hl").show();
 			$('#listcontent').empty();
 			showxinf(0);
 
@@ -416,6 +424,7 @@
 			$(this).parent().addClass("active");
 			$(this).parent().siblings().removeClass("active");
 			$("#div2").hide();
+			$("#hl").show();
 			$('#listcontent').empty();
 			showfavoritef(0);
 	});
@@ -424,6 +433,7 @@
 	$(this).parent().addClass("active");
 	$(this).parent().siblings().removeClass("active");
 	$('#div2').show();	
+	$("#hl").hide();
 	$('#listcontent').empty();
 	});
 	
@@ -431,6 +441,7 @@
 		$(this).parent().addClass("active");
 		$(this).parent().siblings().removeClass("active");
 		$("#div2").hide();
+		$("#hl").show();
 		$('#listcontent').empty();
 		showreview(0);
 	});
@@ -440,6 +451,7 @@
 		$(this).parent().addClass("active");
 		$(this).parent().siblings().removeClass("active");
 		$("#div2").hide();
+		$("#hl").show();
 		$('#listcontent').empty();
 		showcomment(0);
 	});
@@ -448,6 +460,7 @@
 	$(this).parent().addClass("active");
 	$(this).parent().siblings().removeClass("active");
 	$('#div2').show();	
+	$("#hl").hide();
 	$('#listcontent').empty();
 	});
 	
