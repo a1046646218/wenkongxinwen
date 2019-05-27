@@ -94,7 +94,7 @@
                               ${user.introduction}
                             </p>
                         </div>                                                                    
-                    </div>
+                </div>
                <!-- end -->     
                     
                     <!--  右侧主体-->
@@ -149,9 +149,8 @@
                  border: 1px solid #4cd3e3;border-radius:25px;background-image: -webkit-linear-gradient(45deg, #62bdfc 0%, #8490ff 100%);" value="上传" />
                  </div>
 				</form></div>
-	  	</div>          
-  		<img alt="" src="${filename }">
-  		</div></div>
+	  			</div>
+	  		</div>
     </section>
     <!-- End post Area -->  
 </div>
