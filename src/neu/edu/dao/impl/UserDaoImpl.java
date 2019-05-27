@@ -2,6 +2,7 @@ package neu.edu.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import neu.edu.dao.UserDao;
 import neu.edu.dbutil.BaseDao;
@@ -53,7 +54,12 @@ public class UserDaoImpl implements UserDao {
 	public User getUserByUserId(int user_id) {
 		
 		String sql = "Select *from user where userId=? ";
-		return getUser(sql,user_id);
+		ArrayList<User> list = getUser(sql,user_id);
+		User user = null;
+		if(!list.isEmpty()) {
+			user = list.get(0);
+		}
+		return user;
 	}
 	/**
 	 * 根据userName和password 从user表中找到唯一匹配的行
@@ -66,7 +72,12 @@ public class UserDaoImpl implements UserDao {
 	public User getUserBypwdandusername(String userName, String password) {
 		
 		String sql = "Select *from user where userName=? and password=? ";
-		return getUser(sql,userName,password);
+		ArrayList<User> list = getUser(sql,userName,password);
+		User user = null;
+		if(!list.isEmpty()) {
+			user = list.get(0);
+		}
+		return user;
 	}
 	
 	/**
@@ -79,7 +90,12 @@ public class UserDaoImpl implements UserDao {
 	public User getUserByusername(String userName) {
 		
 		String sql = "Select *from user where userName=? ";
-		return getUser(sql,userName);
+		ArrayList<User> list = getUser(sql,userName);
+		User user = null;
+		if(!list.isEmpty()) {
+			user = list.get(0);
+		}
+		return user;
 	}
 	
 	/**
@@ -92,8 +108,12 @@ public class UserDaoImpl implements UserDao {
 	public User getUserByuserId(int userId) {
 		
 		String sql = "Select *from user where userId=? ";
-		Object[] params =new Object[] {userId};
-		return getUser(sql,params);
+		ArrayList<User> list = getUser(sql,userId);
+		User user = null;
+		if(!list.isEmpty()) {
+			user = list.get(0);
+		}
+		return user;
 
 	}
 
@@ -130,13 +150,13 @@ public class UserDaoImpl implements UserDao {
 	 * @param params
 	 * @return
 	 */
-	private User getUser(String sql,Object... params) {
+	private ArrayList<User> getUser(String sql,Object... params) {
 		BaseDao aa = new BaseDao();
 		ResultSet bb =  aa.executeSelect(sql,params);
-		User p = null;
+		ArrayList<User> userList = new ArrayList<>();
 		try {
 			while(bb.next()) {
-				p = new User();
+				User p = new User();
 				p.setUserName(bb.getString(2));
 				p.setPassword(bb.getString(9));
 				p.setFollowers(bb.getInt(5));
@@ -147,13 +167,23 @@ public class UserDaoImpl implements UserDao {
 				p.setVip(bb.getInt(7));
 				p.setUserId(bb.getInt(1));
 				p.setUserimage(bb.getString(10));
+				userList.add(p);
 			}		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			aa.closeAll(aa.con, aa.pst,aa.rs);
 		}
-		return p;
+		return userList;
+	}
+
+	@Override
+	public ArrayList<User> selectUserLowerThenVip(int vip) {
+		
+		String sql ="delete from user where vip <= ?";
+		ArrayList<User> list = new ArrayList<>();
+		list = getUser(sql,vip);
+		return list;
 	}
 
 }

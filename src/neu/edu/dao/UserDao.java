@@ -1,5 +1,7 @@
 package neu.edu.dao;
 
+import java.util.ArrayList;
+
 import neu.edu.entity.User;
 
 public interface UserDao {
@@ -21,5 +23,5 @@ public interface UserDao {
 	
 	public int addNumOfFollowings(int userId);
 	
-
+	public ArrayList<User> selectUserLowerThenVip(int vip);
 }

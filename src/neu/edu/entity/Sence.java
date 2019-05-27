@@ -8,6 +8,7 @@ public class Sence {
 	private String nickName;
 	private int iscomment;
 	private int relativeid;
+	public Sence() {}
 	public int getSenceid() {
 		return senceid;
 	}
