@@ -88,6 +88,17 @@ $(function(){
     				$msg.html('用户已经存在');
     				return false;
     			}
+    			else
+    			{
+    			  var arr = new Array();
+				  arr = userName.split(" ");
+				  if(arr.length != 1){
+					 $('#scan').css("height","30px");
+					 $msg.html('用户名不能含有空格！');
+					 flag1=false;
+				   return false;
+				 }
+				 }
     			return true; 
      }
      function checknickName(){
@@ -99,6 +110,17 @@ $(function(){
 				$msg.html('昵称不能为空');
 				return false;
 			}
+			else
+			{
+			  var arr = new Array();
+			  arr = nickName.split(" ");
+			  if(arr.length != 1){
+				 $('#scan1').css("height","30px");
+				 $msg.html('昵称不能含有空格！');
+				 flag1=false;
+			   return false;
+			 }
+			 }
 			return true; 
     	 
      }
@@ -116,6 +138,17 @@ $(function(){
 				$msg.html('密码长度不能超过30');
 				return false;
 			}
+			else
+			{
+			  var arr = new Array();
+			  arr = Password.split(" ");
+			  if(arr.length != 1){
+				 $('#scan2').css("height","30px");
+				 $msg.html('密码不能含有空格！');
+				 flag1=false;
+			   return false;
+			 }
+			 }
 			return true; 
      }
      function checkPassword2(){
@@ -128,6 +161,7 @@ $(function(){
 				$('#scan3').css("height","30px");
 				return false;
 			}
+			
 			return true; 
      }
      

@@ -63,7 +63,16 @@ $(function(){
     				$('#scan').css("height","30px");
     				$msg.html('用户名不能为空');
     				return false;
-    			}
+    			} 
+    			else{var arr = new Array();
+				 arr = userName.split(" ");
+				 if(arr.length != 1){
+					 $('#scan').css("height","30px");
+					 $msg.html('用户名不能含有空格！');
+					 flag1=false;
+				   return false;
+				 }
+				 }
     			return true; 
      }
    function checkPassword(){
@@ -75,6 +84,15 @@ $(function(){
 				$msg.html('密码长度不能小于6');
 				return false;
 			}
+			else{var arr = new Array();
+			 arr = Password.split(" ");
+			 if(arr.length != 1){
+				 $('#scan2').css("height","30px");
+				 $msg.html('密码不能含有空格！');
+				 flag1=false;
+			   return false;
+			 }
+			 }
 			return true; 
    }
    $("#userName").blur(checkuserName);
