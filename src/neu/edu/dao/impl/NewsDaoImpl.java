@@ -16,7 +16,13 @@ import neu.edu.entity.News;
  */
 public class NewsDaoImpl implements NewsDao{
 	
-
+	public ArrayList<News> HotNews(String newsType) {
+		//编写sql语句以及要传递的参数
+		String sql = "select *from news where type=? ORDER BY likes DESC";
+		Object[] params = new Object[] {newsType};
+		ArrayList<News> newsList = getNewsList(sql,params);
+		return newsList;
+	}
 	/**
 	 * 实现了neu.edu.dao包下的NewsDao接口
 	 * 根据新闻的类型newsType,和当前页面的新闻数newsIndex,从数据库news表中选出数据

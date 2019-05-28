@@ -136,7 +136,7 @@
                             </div>
                             <div class="bottom-wrapper">
                                 <div class="row">
-                                    <div class="col-lg-3 single-b-wrap col-md-12">
+                                    <div class="col-lg-2 single-b-wrap col-md-12">
                                         <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                                         <span id="zan">${news.like}</span>人点赞
                                         <!-- fa-thumbs-up   点赞了
@@ -146,7 +146,7 @@
                                                       	喜欢人
                                                       -->
                                     </div>
-                                    <div class="col-lg-3 single-b-wrap col-md-12">
+                                    <div class="col-lg-2 single-b-wrap col-md-12">
                                         <i class="fa fa-star-o" aria-hidden="true"></i>
                                         <span id="isfavorite">${news.favorites}</span>人收藏
                                         <!--fa-star-o 没收藏
@@ -156,7 +156,7 @@
                                                       	喜欢人
                                                       -->
                                     </div>
-                                    <div class="col-lg-3 single-b-wrap col-md-12">
+                                    <div class="col-lg-2 single-b-wrap col-md-12">
                                         <i class="fa fa-comment-o" aria-hidden="true"></i> 
                                         <span id="cha">${news.comments}</span>人评论
                                         <!--
@@ -165,12 +165,10 @@
                                                       	评论人
                                                       -->
                                     </div>
-                                    <div class="col-lg-3 single-b-wrap col-md-12">
+                                    <div class="col-lg-6 single-b-wrap col-md-12">
                                         <ul class="social-icons">
-                                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+                                            <li id="shareqqzone"><i class="fa fa-qq" aria-hidden="true"></i><span>&nbsp;&nbsp;&nbsp;qq空间分享<span></li>
+                                            <li id="sharexinlang"><i class="fa fa-weibo" aria-hidden="true"></i><span>&nbsp;&nbsp;&nbsp;新浪分享<span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -785,7 +783,27 @@ $(document).ready(function(){
     	
     });
 	
-	
+	//分享微博
+	function shareToXl(title,url,picurl){
+	var sharesinastring='http://v.t.sina.com.cn/share/share.php?title='+title+'&url='+url+'&content=utf-8&sourceUrl='+url+'&pic='+picurl;
+	window.open(sharesinastring,'newwindow','height=400,width=400,top=100,left=100');
+	}
+
+	//分享到qq空间
+	function shareToQq(title,url,picurl){
+	var shareqqzonestring='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+title+'&url='+url+'&pics='+picurl;
+	window.open(shareqqzonestring,'newwindow','height=400,width=400,top=100,left=100');
+	}
+
+	$('#sharexinlang').click(function(){
+	var test = window.location.href; 
+	shareToXl("分享",test,"");
+	});
+	$('#shareqqzone').click(function(){
+	var test = window.location.href; 
+	shareToQq("分享",test,"");
+});
+
 	
 });
 </script>
