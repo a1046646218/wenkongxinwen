@@ -110,13 +110,13 @@
 	  		    <!-- 输入部分 -->
 	  		     <div class="input-group-icon mt-25">	
 	  		 	 <span class="glyphicon glyphicon-list-alt mb-20" style="font-size:20px;font-weight:bold;color:#5bc0de"> 新闻标题</span>
-			     <input  class="form-control" style="background-color:#f9f9ff;border-left: 5px solid #c43afe;" type="text" name="title" 
-			     placeholder="取个吸引眼球的标题吧......" onfocus="this.placeholder = ''" onblur="this.placeholder = '取个引人注目的标题吧......'" required="" >
-		        </div>	
+			     <input  id="inputTitle" class="form-control" style="background-color:#f9f9ff;border-left: 5px solid #c43afe;" type="text" name="title" 
+			     placeholder="取个吸引眼球的标题吧......" onfocus="this.placeholder = ''" onblur="this.placeholder = '取个引人注目的标题吧......'" required="required" >
+	  		     </div>	
 	  			<div class=" input-group-icon mt-30">
 	  		     <span class="glyphicon glyphicon-list mb-20" style="font-size:20px;font-weight:bold;color:#5bc0de"> 新闻内容</span>
 				<textarea class="form-control" style="background-color:#f9f9ff;border-left: 5px solid #c43afe;" rows="20"  name="content"
-				placeholder="快点写下你想要分享的新闻吧！！！" onfocus="this.placeholder = ''" onblur="this.placeholder = '快点写下你想要分享的新闻吧！！！'" required=""></textarea>
+				placeholder="快点写下你想要分享的新闻吧！！！" onfocus="this.placeholder = ''" onblur="this.placeholder = '快点写下你想要分享的新闻吧！！！'" required="required"></textarea>
 				</div>
 				<!--新闻类型  -->			
 				<div class="row mt-20">
@@ -124,22 +124,22 @@
 	  		        	<div class="col-lg-2 ">
 	  		        	<div style="height:42px;width:90px;color: #69B4FD;
 	  		        	border: 1px solid #69B4FD;background: #fff;padding: 0 30px;font-size: .8em;text-align: center;">
-	  		        	 娱乐<input type="radio" name="type" value="娱乐"/ ></div>
+	  		        	 娱乐<input type="radio" name="type" value="娱乐" checked="checked"/></div>
 	  		        	</div>
 	  		        	<div class="col-lg-2">
 	  		        	<div style="height:42px;width:90px;color: #4cd3e3;
                          border: 1px solid #4cd3e3;background: #fff;padding: 0 30px;font-size: .8em;text-align: center;">
-	  		        	 体育<input type="radio" name="type" value="娱乐"/ >
+	  		        	 体育<input type="radio" name="type" value="体育"/ >
 	  		        	</div></div>
 	  		        	<div class="col-lg-2">
 	  		        	<div style="height:42px;width:90px;color: #f4e700;
                          border: 1px solid #f4e700;background: #fff;padding: 0 30px;font-size: .8em;text-align: center;">
-	  		        	 教育<input type="radio" name="type" value="娱乐"/ >
+	  		        	 教育<input type="radio" name="type" value="教育"/ >
 	  		        	</div></div>
 	  		        	<div class="col-lg-2">
 	  		        	<div style="height:42px;width:90px;color:#f44a40;;
                          border: 1px solid #f44a40;;background: #fff;padding: 0 30px;font-size: .8em;text-align: center;">
-	  		        	 军事<input type="radio" name="type" value="娱乐"/ >
+	  		        	 军事<input type="radio" name="type" value="军事"/ >
 	  		        	</div></div>	
 	  		        	</div> 	
 	  		    <!-- 上传图片 -->		        				
