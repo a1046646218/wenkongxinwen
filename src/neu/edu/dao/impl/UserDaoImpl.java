@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 		
 		String sql = "Select *from user where userId=? ";
 		ArrayList<User> list = getUser(sql,user_id);
-		User user = null;
+		User user = null;  
 		if(!list.isEmpty()) {
 			user = list.get(0);
 		}
