@@ -73,11 +73,7 @@ public class PublicNewsServlet extends HttpServlet {
 		AddNewsService addNewsService = new AddNewsService();
 		addNewsService.addNews(title, user_id, content, type, nickname, url);
 		
-		ForNewsListService forNewsListService = new ForNewsListService();
-		
-		
-//		request.getSession().setAttribute("filename", forNewsListService.getNewsByID(31).getUrl());
-//		response.sendRedirect("upload.jsp");
+		response.sendRedirect("main.jsp");
 	}
 	
 	/**
