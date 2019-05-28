@@ -115,7 +115,7 @@
 	  		     </div>	
 	  			<div class=" input-group-icon mt-30">
 	  		     <span class="glyphicon glyphicon-list mb-20" style="font-size:20px;font-weight:bold;color:#5bc0de"> 新闻内容</span>
-				<textarea class="form-control" style="background-color:#f9f9ff;border-left: 5px solid #c43afe;" rows="20"  name="content"
+				<textarea id="textarea" class="form-control" style="background-color:#f9f9ff;border-left: 5px solid #c43afe;" rows="20"  name="content"
 				placeholder="快点写下你想要分享的新闻吧！！！" onfocus="this.placeholder = ''" onblur="this.placeholder = '快点写下你想要分享的新闻吧！！！'" required="required"></textarea>
 				</div>
 				<!--新闻类型  -->			
@@ -168,5 +168,42 @@
         <script src="js/jquery.sticky.js"></script>
         <script src="js/main.js"></script>  
         <script src="js/template.js"></script>
+                <script type="text/javascript" >
+	        var textarea = document.getElementById('textarea');
+	        function makeExpandingArea(el){
+	            var setStyle = function(el){
+	                el.style.height = 'auto';
+	                el.style.height = el.scrollHeight + 'px';
+	                // console.log(el.scrollHeight);
+	            }
+	            var delayedResize = function(el) {
+	                window.setTimeout(function(){
+	                    setStyle(el);
+	                }, 0);
+	            }
+	            if(el.addEventListener){
+	                el.addEventListener('input',function(){
+	                    setStyle(el)
+	                },false);
+	                setStyle(el)
+	            }else if(el.attachEvent){
+	                el.attachEvent('onpropertychange',function(){
+	                    setStyle(el)
+	                })
+	                setStyle(el)
+	            }
+	            if(window.VBArray && window.addEventListener) { //IE9
+	                 el.attachEvent("onkeydown", function() {
+	                var key = window.event.keyCode;
+	                if(key == 8 || key == 46) delayedResize(el);
+	             
+	              });
+	              el.attachEvent("oncut", function(){
+	                delayedResize(el);
+	              });//处理粘贴
+	            }
+	        }
+	        makeExpandingArea(textarea);
+   		 </script>
     </body>
 </html>
