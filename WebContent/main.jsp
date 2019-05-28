@@ -86,7 +86,7 @@
                 <div class="col-lg-8">
                     <div class="post-lists search-list" >       
                         <div id="addNews" class="justify-content-center d-flex">
-                            <a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60" href="#"> Load More Post</a>
+                            <a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"> Load More</a>
                         </div>                                                                     
                     </div>                          
                 </div>
@@ -108,26 +108,32 @@
                         <h4 class="text-uppercase pb-20">标签</h4>
                         <ul>
                             <li id="changeNews" name="娱乐">
-                                <a href="#">娱乐 <span></span></a>
+                                <a >娱乐 <span></span></a>
                             </li>
                             <li id="changeNews" name="直播">
-                                <a href="#">直播 <span></span></a>
+                                <a >直播 <span></span></a>
                             </li>
-                            <li id="changeNews">
-                                <a href="#">Fashion <span></span></a>
+                            <li id="changeNews" name="汽车">
+                                <a >汽车 <span></span></a>
                             </li>
-                            <li id="changeNews">
-                                <a href="#">Art <span></span></a>
+                            <li id="changeNews" name="游戏">
+                                <a>游戏 <span></span></a>
                             </li>
-                            <li id="changeNews">
-                                <a href="#">Food <span></span></a>
+                            <li id="changeNews" name="财经">
+                                <a>财经<span></span></a>
                             </li>
-                            <li id="changeNews">
-                                <a href="#">Architecture <span></span></a>
+                            <li id="changeNews" name="图片">
+                                <a>图片<span></span></a>
                             </li>
-                            <li id="changeNews">
-                                <a href="#">Adventure <span></span></a>
+                            <li id="changeNews" name="搞笑">
+                                <a	>搞笑<span></span></a>
                             </li>                                
+                            <li id="changeNews" name="时尚">
+                                <a	>时尚<span></span></a>
+                            </li> 
+                              <li id="changeNews" name="探索">
+                                <a	>探索<span></span></a>
+                            </li>              
                         </ul>
                     </div>
                      
@@ -286,7 +292,7 @@
         			async:true,
         			dataType:"text",
         			success:function(results){
-        				alert(results);
+        				//alert(results);
         				var jsoncomment = JSON.parse(results);
         				for(var i=0;i<jsoncomment.length;i++){
         					
