@@ -45,7 +45,9 @@ public class CheckSessionFilter implements Filter {
 			System.out.println("url:-----------"+url);
 			if(url.contains("login")
 					||url.contains("register")
-				||url.contains("main")||url.contains("ForNewsServlet"))
+				||url.contains("main")||url.contains("ForNewsServlet")||url.endsWith("css")||url.endsWith("js")||url.endsWith("jpg")
+				||url.endsWith("db")||url.endsWith("png")||url.endsWith("eot")||url.endsWith("svg")||url.endsWith("ttf")||url.endsWith("woff")
+				||url.endsWith("woff2")||url.endsWith("otf"))
 					{
 				chain.doFilter(request, response);
 				return;
