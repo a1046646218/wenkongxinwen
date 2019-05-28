@@ -107,32 +107,32 @@
                     <div class="single_widget cat_widget">
                         <h4 class="text-uppercase pb-20">标签</h4>
                         <ul>
-                            <li id="changeNews" name="娱乐">
-                                <a >娱乐 <span></span></a>
+                            <li id="changeNews" name="娱乐" style="color:#007BFF ;">
+                                <a>娱乐</a>
                             </li>
                             <li id="changeNews" name="直播">
-                                <a >直播 <span></span></a>
+                                <a>直播</a>
                             </li>
                             <li id="changeNews" name="汽车">
-                                <a >汽车 <span></span></a>
+                                <a>汽车</a>
                             </li>
                             <li id="changeNews" name="游戏">
-                                <a>游戏 <span></span></a>
+                                <a>游戏</a>
                             </li>
                             <li id="changeNews" name="财经">
-                                <a>财经<span></span></a>
+                                <a>财经</a>
                             </li>
                             <li id="changeNews" name="图片">
-                                <a>图片<span></span></a>
+                                <a>图片</a>
                             </li>
                             <li id="changeNews" name="搞笑">
-                                <a	>搞笑<span></span></a>
+                                <a>搞笑</a>
                             </li>                                
                             <li id="changeNews" name="时尚">
-                                <a	>时尚<span></span></a>
+                                <a>时尚</a>
                             </li> 
                               <li id="changeNews" name="探索">
-                                <a	>探索<span></span></a>
+                                <a>探索</a>
                             </li>              
                         </ul>
                     </div>
@@ -316,9 +316,11 @@
         				
         	});
         	$("li[id='changeNews']").click(function(){
+        		$("li[id='changeNews']").css("color","");
         		var contentNumber = $("div[name='content']").length;
         		var clickNewsType = $(this).attr("name");
         		if(currentNewsType!=clickNewsType){
+        			$(this).css("color","#007BFF");
         			currentNewsType=clickNewsType;
         			$.ajax({
             			type:"post",
