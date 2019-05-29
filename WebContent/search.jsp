@@ -220,6 +220,10 @@
 		$('#searchtxt').text($("#info").val());
         var info = $("#info").val();
         alert(info);
+        info = info.trim().replace(/\s/g,"");
+        if(info.length>=10){
+        	info = info.substring(0,5);
+        }
        if(info.length>0){
         $.ajax({
             type: 'post', 

@@ -554,6 +554,11 @@
 	$('#submitusername').click(function(){
 		alert('hha');
 		var str = $('#submitusernamegai').val();
+		str = str.trim().replace(/\s/g,"");
+        if(str.length>=10){
+        	alert("输入用户名过长");
+        	return;
+        }
 		$.ajax({
 			context : document.body,
 			dataType : "text",
