@@ -367,7 +367,7 @@ $(document).ready(function(){
 							$('#otherguanzhu').html("取消关注");
 						}
 						if(result=="error"){
-							alert("sdasd");
+							//alert("sdasd");
 							$('#otherguanzhu').remove();
 						}
 					}
@@ -733,7 +733,7 @@ $(document).ready(function(){
 												reviewelement = reviewelement.prev();
 											}
 											var huifunum = reviewelement.find('#bt_chaer').next().text();
-											alert(huifunum);
+											//alert(huifunum);
 											reviewelement.find('#bt_chaer').next().text(parseInt(huifunum)+1);
 											$fatherreview.next().remove();
 											
@@ -778,7 +778,7 @@ $(document).ready(function(){
 	
 	 $('body').on('click','[tohome]',function(){
     		var otheruserId = $(this).attr("tohome");
-    		alert(otheruserId);
+    		//alert(otheruserId);
     		$(location).attr("href","clickHeadToHomeServlet?"+"otheruserId="+otheruserId); 
     	
     });

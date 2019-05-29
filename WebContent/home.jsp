@@ -395,7 +395,7 @@
 			async : false,
 			data : {"user_id" : userid,"num" : num},
 			success : function(result) {
-				alert(result);
+				//alert(result);
 				var jsoncomment = JSON.parse(result);
 				for (var i = jsoncomment.length - 1; i >= 0; i--){
 					                       var str = "<div class=\"comment-list \" style=\" min-height:100px;height:auto!important;\" id=\"itissecond\" name=\""+jsoncomment[i].reviewId+"\">"+
@@ -432,7 +432,7 @@
 			async : false,
 			data : {"user_id" : userid,"num" :num},
 			success : function(result) {
-				alert(result);
+				//alert(result);
 				var jsoncomment = JSON.parse(result);
 				for (var i = jsoncomment.length - 1; i >= 0; i--){
 					                         var str =  "<div class=\"single-comment justify-content-between d-flex\" style=\" min-height:100px;height:auto!important;\">"+
@@ -516,7 +516,7 @@
 	
 	$('body').on('click','#enternewsdetail',function(){
     		var searchnew_id = $(this).attr("name");
-    		alert(searchnew_id);
+    		//alert(searchnew_id);
     		$(location).attr("href","EnterNewdetailServlet?"+"searchnew_id="+searchnew_id); 
     	
     });
@@ -538,7 +538,7 @@
 		var num = $('#listcontent').children().length;
 		//alert(num);
 		if(text=="消息"){
-			alert("chengg");
+			//alert("chengg");
 			showcomment(num);
 		}else if(text=="参与"){
 			showreview(num);
@@ -552,7 +552,7 @@
 	
 	
 	$('#submitusername').click(function(){
-		alert('hha');
+		//alert('hha');
 		var str = $('#submitusernamegai').val();
 		str = str.trim().replace(/\s/g,"");
         if(str.length>=10){
@@ -582,7 +582,7 @@
 	
 	
 	$('#submitintroducesss').click(function(){
-		alert('hha');
+		//alert('hha');
 		var str = $('#submitintroduce').val();
 		$.ajax({
 			context : document.body,

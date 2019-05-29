@@ -382,7 +382,7 @@
 	
 	$('body').on('click','#enternewsdetail',function(){
     		var searchnew_id = $(this).attr("name");
-    		alert(searchnew_id);
+    		//alert(searchnew_id);
     		$(location).attr("href","EnterNewdetailServlet?"+"searchnew_id="+searchnew_id); 
     	
     });

@@ -177,7 +177,7 @@
 	
 	$(document).ready(function(){
 		var searchtxt = $('#searchtxt').text();
-		alert(searchtxt);
+		//alert(searchtxt);
         $.ajax({
             type: 'post', 
             url: "searchservlet",
@@ -219,7 +219,7 @@
 	$("#search").click(function() {
 		$('#searchtxt').text($("#info").val());
         var info = $("#info").val();
-        alert(info);
+        //alert(info);
         info = info.trim().replace(/\s/g,"");
         if(info.length>=10){
         	info = info.substring(0,5);
@@ -267,7 +267,7 @@
     });
     $('body').on('click','#enternewsdetail',function(){
     	var searchnew_id = $(this).attr("name");
-    	alert(searchnew_id);
+    	//alert(searchnew_id);
     	$(location).attr("href","EnterNewdetailServlet?"+"searchnew_id="+searchnew_id); 
     	
     });
@@ -279,10 +279,10 @@
     -->
 	<script>
 		$("#addNews").click(function(){
-		alert("ds");
+		//alert("ds");
 	        var info = $('#searchtxt').text();
 	        var listnum = $('[id=firstnewslist]').length;
-	        alert(listnum);
+	       // alert(listnum);
 	       if(info.length>0){
 	        $.ajax({
 	            type: 'post', 
