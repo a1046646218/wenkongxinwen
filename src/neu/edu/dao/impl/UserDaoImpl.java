@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao {
 		BaseDao aa = new BaseDao();
 		String sql = "insert into user (userName,nickName,followings,followers,introduction,vip,type,Password,userimage)"
 				+ " values(?,?,?,?,?,?,?,?,?)";
-		int bb =  aa.executeIUD(sql,new Object[] {username,nickname,0,0,introduction,0,0,password,"img/i7.jpg"});	
+		int bb =  aa.executeIUD(sql,new Object[] {username,nickname,0,0,introduction,100,0,password,"img/i7.jpg"});	
 		return bb;
 	}
 	

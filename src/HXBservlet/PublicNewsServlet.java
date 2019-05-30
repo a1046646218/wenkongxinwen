@@ -25,7 +25,7 @@ import neu.edu.service.ForNewsListService;
 public class PublicNewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	String bathcopyPath = "C:/Users/mr.H/git/wenkongxinwen/WebContent/upload/";
+	//String bathcopyPath = "C:/Users/mr.H/git/wenkongxinwen/WebContent/upload/";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
@@ -66,8 +66,8 @@ public class PublicNewsServlet extends HttpServlet {
 		
 		//3. ÉÏ´«
 		part.write(fileFinalPath);
-		String copyPath = bathcopyPath+newFileName;
-		copyFile(fileFinalPath,copyPath);
+		//String copyPath = bathcopyPath+newFileName;
+		//copyFile(fileFinalPath,copyPath);
 
 		
 		AddNewsService addNewsService = new AddNewsService();
